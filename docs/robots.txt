@@ -1,0 +1,5 @@
+# Vorschau. Vor Livegang ersetzen durch: Allow: / und Sitemap-Zeile mit der echten Domain
+User-agent: *
+Disallow: /
+
+Sitemap: https://leitung-gif.github.io/eco-green-website/sitemap.xml

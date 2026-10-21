@@ -1,0 +1,21 @@
+# Eco Green GmbH
+
+> Bohrfirma für Erdwärmesonden in Regensdorf, Kanton Zürich. Träger des FWS-Gütesiegels für Erdwärmesonden-Bohrfirmen (Liste Juni 2021 und Juli 2026). Sondenauslegung, Bewilligungsunterlagen, Erdsondenbohrung, Sondeneinbau, Druckprobe und Anbindung an die Wärmepumpe.
+
+## Fakten
+- Firma: Eco Green GmbH, UID CHE-141.654.180, Handelsregister Kanton Zürich
+- Adresse: Pumpwerkstrasse 40, 8105 Regensdorf, Schweiz
+- Telefon: 044 400 20 20, E-Mail: info@eco-green.ch
+- Gütesiegel: FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen, eine von 45 Firmen auf der Liste vom Juli 2026: https://www.fws.ch/wp-content/uploads/2026/07/072026_FWS_GSP_Guetesiegelliste_D_F.pdf
+- Einsatzgebiet: Kanton Zürich und angrenzende Regionen
+- Förderung Kanton Zürich: Erdwärmepumpe bis 15 kW CHF 6'800, darüber CHF 420 pro zusätzliches kW. Zusatzbeitrag CHF 3'000 plus CHF 100 pro kW über 15 kW für Sonden ohne Frostschutzmittel oder mit vollständiger Regeneration. Gesuch vor der Bohrung, ersetzt Öl-, Gas- oder Elektroheizung in bestehendem Gebäude. Der Kanton verlangt eine Bohrfirma mit gültigem Gütesiegel.
+- Bewilligung: gewässerschutzrechtliche Bewilligung des AWEL, eingereicht bei der Gemeinde. Unter 2,5 m Grenzabstand Zustimmung des Nachbarn.
+
+## Seiten
+- [Start](https://leitung-gif.github.io/eco-green-website/): Überblick, Ablauf in sechs Schritten, Förderung, Baustellenregeln, häufige Fragen
+- [Leistungen](https://leitung-gif.github.io/eco-green-website/leistungen): Sondenauslegung bis Befüllung
+- [Ablauf](https://leitung-gif.github.io/eco-green-website/ablauf): sechs Schritte, Bewilligung, Baustellenregeln
+- [Förderung](https://leitung-gif.github.io/eco-green-website/foerderung): Beiträge, Bedingungen, Unterlagen, Rechner
+- [Baustellen](https://leitung-gif.github.io/eco-green-website/referenzen): Projektbeispiele und Geräte
+- [Über uns](https://leitung-gif.github.io/eco-green-website/ueber-uns): Firma, Gütesiegel, Personen
+- [Kontakt](https://leitung-gif.github.io/eco-green-website/kontakt): Telefon, E-Mail, Angaben für die Erstabklärung
