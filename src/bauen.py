@@ -132,7 +132,7 @@ def head(s):
 <meta property="og:image" content="{BASIS}img/{s.get('ogbild', 'og')}.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{esc(s.get('ogalt', 'Eco Green, Erdwärmesonden aus Regensdorf. Schwarzweissfoto einer Baustelle.'))}">
+<meta property="og:image:alt" content="{esc(s.get('ogalt', 'Eco Green, Erdwärmesonden aus Regensdorf. Foto einer Baustelle.'))}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(s.get('og', s['title']))}">
 <meta name="twitter:description" content="{esc(s['desc'])}">
@@ -142,7 +142,7 @@ def head(s):
 <link rel="apple-touch-icon" href="{p}apple-touch-icon.png">
 <link rel="manifest" href="{p}site.webmanifest">
 <link rel="preload" href="{p}fonts/schibsted-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}<link rel="stylesheet" href="{p}site.css?v=3">
+{pre}<link rel="stylesheet" href="{p}site.css?v=4">
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
@@ -208,7 +208,7 @@ def fuss(p):
  </div>
 </footer>
 <nav class="leiste" aria-label="Schnellkontakt"><a class="knopf zwei" href="{TEL_LINK}">Anrufen</a><a class="knopf" href="{p}kontakt">Offerte anfragen</a></nav>
-<script src="{p}site.js?v=3" defer></script>
+<script src="{p}site.js?v=4" defer></script>
 </body>
 </html>
 """
@@ -227,7 +227,7 @@ def seitenkopf(s, h1, lead, bildteil=""):
  <div class="wrap raster">
   <nav class="brot-nav" aria-label="Brotkrumen" style="grid-column:1/-1"><ol class="brot">{''.join(li)}</ol></nav>
   <div class="{textspan}"><h1>{h1}</h1><p class="lead">{lead}</p></div>
-  {f'<div class="seitenkopf-bild">{bildteil}</div>' if bildteil else ''}
+  {f'<div class="seitenkopf-bild versatz">{bildteil}</div>' if bildteil else ''}
  </div>
 </section>
 """
@@ -368,7 +368,7 @@ def seite_start():
    <p class="lead">Eco Green bohrt Erdwärmesonden für Ein- und Mehrfamilienhäuser im Kanton Zürich. Von der Abklärung bis zur angeschlossenen Sonde, mit eigenen Geräten und eigenem Bohrteam.</p>
    <div class="knopfreihe"><a class="knopf" href="kontakt">Offerte anfragen</a><a class="knopf zwei" href="{TEL_LINK}">{TEL}</a></div>
   </div>
-  <div class="hero-bild">{foto(p, "garten", "Raupenbohrgerät von Eco Green bohrt im Garten eines Einfamilienhauses", "Bohrung im Garten eines Einfamilienhauses.", lazy=False, prio=True)}</div>
+  <div class="hero-bild versatz">{foto(p, "garten", "Raupenbohrgerät von Eco Green bohrt im Garten eines Einfamilienhauses", "Bohrung im Garten eines Einfamilienhauses.", lazy=False, prio=True)}</div>
   <ul class="belege">
     <li><a href="{FWS_PDF}" rel="noopener"><b>FWS-Gütesiegel</b>Eine von 45 Bohrfirmen der Schweiz</a></li>
     <li><a href="#foerderung"><b>Förderbeitrag</b>ab CHF 6'800 vom Kanton</a></li>
@@ -449,7 +449,7 @@ def seite_start():
  </div>
 </section>
 
-<section class="sektion" id="foerderung" aria-labelledby="foerder-h">
+<section class="sektion flaeche-schraeg" id="foerderung" aria-labelledby="foerder-h">
  <div class="wrap raster">
   <div class="foerder-text">
    <span class="label">Förderung</span>
@@ -485,7 +485,7 @@ def seite_leistungen():
         rechts = ""
         if b:
             alt = {"garten": "Raupenbohrgerät bohrt im Garten eines Einfamilienhauses", "verteiler": "Sondenverteiler mit zwei Manometern"}[b]
-            rechts = f'<div class="bild">{foto(p, b, alt, sizes="(max-width: 900px) 100vw, 33vw")}</div>'
+            rechts = f'<div class="bild versatz">{foto(p, b, alt, sizes="(max-width: 900px) 100vw, 33vw")}</div>'
         reihen += f'<article class="leistung"><span class="nr">{i + 1:02d}</span><div class="inhalt"><h2>{t}</h2><p>{x}</p></div>{rechts}</article>'
     body = seitenkopf(s, "Alles, was zur Erdsonde gehört.", "Eco Green bohrt Erdwärmesonden und schliesst sie bis in den Heizraum an. Sie haben eine Ansprechperson vom ersten Anruf bis zum Bohrprotokoll.") + f"""
 <section class="sektion"><div class="wrap raster">{reihen}</div></section>
@@ -589,7 +589,7 @@ def seite_foerderung():
     p = s["p"]
     s["schema"] = [faq_schema(FOERDER_FAQ)]
     body = seitenkopf(s, "Förderbeitrag Kanton Zürich.", "Der Kanton fördert den Ersatz von Öl-, Gas- und Elektroheizungen durch eine Erdwärmepumpe. Das Gesuch muss eingereicht sein, bevor wir bohren.") + f"""
-<section class="sektion" aria-labelledby="rechner-h">
+<section class="sektion flaeche-schraeg" aria-labelledby="rechner-h">
  <div class="wrap raster">
   <div class="foerder-text">
    <h2 id="rechner-h">Was der Kanton an Ihre Anlage zahlt.</h2>
