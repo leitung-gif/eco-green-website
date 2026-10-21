@@ -41,14 +41,8 @@ GROSS = {"kran", "garten"}
 
 
 def grau(im: Image.Image) -> Image.Image:
-    """Farbfilter der Originale neutralisieren: Luminanz, sanfte Kurve, leichte Waerme."""
-    g = ImageOps.grayscale(im)
-    g = ImageOps.autocontrast(g, cutoff=(0.6, 0.4))
-    lut = [int(255 * ((i / 255) ** 1.08)) for i in range(256)]
-    g = g.point(lut)
-    # leichte warme Tonung, damit das Grau zum Kalkgrund passt
-    warm = ImageOps.colorize(g, black=(16, 21, 17), white=(250, 251, 248), mid=(124, 129, 123))
-    return warm
+    """Farbfotos, seit 21.10.2026 auf Sinans Wunsch nicht mehr schwarzweiss. Nur sanfter Kontrast."""
+    return ImageOps.autocontrast(im, cutoff=(0.3, 0.3), preserve_tone=True)
 
 
 def fotos():
