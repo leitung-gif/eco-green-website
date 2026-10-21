@@ -45,8 +45,8 @@ BUEROZEIT = "Montag bis Freitag, 07.30 bis 12.00 und 13.30 bis 17.00 Uhr"
 EINSATZ = "Kanton Zürich und angrenzende Regionen"
 
 MAIL_TEXT = ("Guten Tag\n\nIch möchte wissen, ob bei mir eine Erdwärmesonde möglich ist.\n\n"
-             "Adresse des Grundstücks:\nHeutige Heizung (Öl, Gas, Elektro):\nBaujahr des Hauses:\n"
-             "Verbrauch pro Jahr (zum Beispiel Liter Öl):\nTelefon für Rückruf:\n\nFreundliche Grüsse\n")
+             "Adresse des Grundstücks:\nHeutige Heizung (Öl, Gas, Elektro) und ihr Baujahr:\n"
+             "Verbrauch pro Jahr (zum Beispiel Liter Öl):\nBaujahr und Wohnfläche des Hauses:\nTelefon für Rückruf:\n\nFreundliche Grüsse\n")
 MAILTO = f"mailto:{MAIL}?subject={quote('Erstabklärung Erdwärmesonde')}&body={quote(MAIL_TEXT)}"
 
 NAV = [("leistungen", "Leistungen"), ("ablauf", "Ablauf"), ("foerderung", "Förderung"),
@@ -160,7 +160,7 @@ def kopf(s):
     start = p if p else "./"
     return f"""<header class="kopf">
  <div class="wrap kopf-in">
-  <a class="marke" href="{start}" aria-label="Eco Green, zur Startseite"><img src="{p}img/logo.svg" width="150" height="56" alt="Eco Green"></a>
+  <a class="marke" href="{start}" aria-label="Eco Green, zur Startseite"><img src="{p}img/logo.svg" width="170" height="63" alt="Eco Green"></a>
   <nav class="nav" aria-label="Hauptnavigation">{nav}</nav>
   <a class="knopf" href="{TEL_LINK}"><span class="lang">Anrufen </span>{TEL}</a>
   <button class="menuknopf" type="button" aria-expanded="false" aria-controls="menue">Menü</button>
@@ -194,7 +194,7 @@ def fuss(p):
  <div class="wrap">
   <div class="fuss-grid">
    <div>
-    <a class="marke" href="{start}"><img src="{p}img/logo-hell.svg" width="150" height="56" alt="Eco Green, zur Startseite" loading="lazy"></a>
+    <a class="marke" href="{start}"><img src="{p}img/logo-hell.svg" width="170" height="63" alt="Eco Green, zur Startseite" loading="lazy"></a>
     <p>Erdwärmesonden für Häuser im Kanton Zürich.<br>Bohrfirma mit FWS-Gütesiegel.</p>
     <a class="fuss-siegel" href="{FWS_PDF}" rel="noopener">FWS-Gütesiegelliste, Stand Juli 2026</a>
    </div>
@@ -237,10 +237,6 @@ FAQ = [
      "<p>Das hängt vom Wärmebedarf und vom Untergrund ab. Ein Einfamilienhaus braucht oft eine oder zwei Sonden von 150 bis 250 Metern. Im Kanton Zürich reichen Erdwärmesonden meist bis höchstens 500 Meter.</p>"),
     ("Wie lange dauert die Bohrung?",
      "<p>Pro Sonde meist ein bis zwei Tage. Dazu kommen ein Tag für Aufbau und Abbau und die Arbeiten für den Anschluss ans Haus. Den genauen Plan erhalten Sie mit der Offerte.</p>"),
-    ("Wie laut ist eine Erdsondenbohrung?",
-     "<p>Laut. Bohrgerät und Kompressor hört man in der Nachbarschaft. Wir arbeiten nur zu festen Zeiten und informieren Ihre Nachbarn eine Woche vorher schriftlich.</p>"),
-    ("Was zahlt der Kanton Zürich an eine Erdwärmepumpe?",
-     "<p>Bis 15 kW Heizleistung CHF 6'800, darüber CHF 420 pro zusätzliches kW. Bedingung ist, dass die Anlage eine Öl-, Gas- oder Elektroheizung in einem bestehenden Gebäude ersetzt. Das Gesuch muss vor der Bohrung eingereicht sein.</p>"),
     ("Wer reicht die Bewilligung ein?",
      "<p>Jede Erdwärmesonde braucht eine gewässerschutzrechtliche Bewilligung des AWEL. Eingereicht wird bei der Baubehörde Ihrer Gemeinde, auch über eBaugesucheZH. Wir stellen die Unterlagen für Sie zusammen.</p>"),
     ("Was bedeutet das FWS-Gütesiegel?",
@@ -258,7 +254,7 @@ def faq_html(liste):
 
 SCHRITTE = [
     ("Abklärung", "1 bis 3 Arbeitstage",
-     "Sie schicken uns Adresse und heutige Heizung. Wir prüfen im Wärmenutzungsatlas des Kantons, ob auf Ihrer Parzelle gebohrt werden darf, und schätzen Anzahl und Tiefe der Sonden."),
+     "Sie schicken uns Adresse und heutigen Verbrauch. Wir prüfen im Wärmenutzungsatlas des Kantons, ob auf Ihrer Parzelle gebohrt werden darf, und schätzen Anzahl und Tiefe der Sonden."),
     ("Bewilligung und Förderung", "4 bis 8 Wochen",
      "Das Bewilligungsgesuch geht über Ihre Gemeinde an das AWEL. Gleichzeitig reichen Sie das Fördergesuch beim Kanton ein. Gebohrt wird erst, wenn beides steht."),
     ("Bohrung", "1 bis 2 Tage pro Sonde",
@@ -272,18 +268,12 @@ SCHRITTE = [
 ]
 
 LEISTUNGEN = [
-    ("Sondenauslegung", "Aus Wärmebedarf und Untergrund berechnen wir, wie viele Sonden Sie brauchen und wie tief sie gehen.",
-     "Eine Sonde, die für Ihr Haus gerechnet ist. Zu kurz kühlt der Boden aus, zu lang zahlen Sie Meter, die Sie nicht brauchen.", None),
-    ("Bewilligungsunterlagen", "Wir stellen die Unterlagen für das gewässerschutzrechtliche Gesuch zusammen: Situationsplan mit Sondenstandort, Sondenlänge, Angaben zur Wärmepumpe.",
-     "Ein vollständiges Gesuch, das Sie bei der Gemeinde einreichen. Keine Rückfragen wegen fehlender Pläne.", None),
-    ("Erdsondenbohrung", "Mit eigenen Raupenbohrgeräten und eigenem Bohrteam. Ist die Zufahrt zu eng, hebt ein Kran das Gerät über das Haus.",
-     "Gebohrt wird an dem Tag, der in der Offerte steht. Mit einer Ansprechperson auf der Baustelle.", "garten"),
-    ("Sondeneinbau und Verfüllung", "Wir bauen die Sonde ein und verfüllen das Bohrloch von unten nach oben dicht.",
-     "Eine Sonde, die das Grundwasser schützt und Jahrzehnte im Boden bleibt.", None),
-    ("Druckprobe und Anbindung", "Wir prüfen jede Sonde mit Druck, verlegen die Verbindungsleitungen zum Haus und setzen den Verteiler im Heizraum.",
-     "Ein dichtes System bis zur Hauswand, dokumentiert im Protokoll.", "verteiler"),
-    ("Befüllung und Übergabe", "Wir füllen Sonde und Leitungen mit Wärmeträgerflüssigkeit und übergeben die Anlage an Ihren Heizungsinstallateur.",
-     "Eine betriebsbereite Wärmequelle. Dazu Bohrprotokoll und Rechnung für das Fördergesuch.", None),
+    ("Sondenauslegung", "Aus Wärmebedarf und Untergrund berechnen wir, wie viele Sonden Ihr Haus braucht und wie tief sie gehen. Zu kurz kühlt der Boden über die Jahre aus. Zu lang zahlen Sie Meter, die Sie nicht brauchen.", None),
+    ("Bewilligungs&shy;unterlagen", "Für das gewässerschutzrechtliche Gesuch stellen wir zusammen, was die Gemeinde verlangt: Situationsplan mit Sondenstandort, Sondenlänge, Angaben zur Wärmepumpe. Sie unterschreiben und reichen ein.", None),
+    ("Erdsonden&shy;bohrung", "Mit eigenen Raupenbohrgeräten und eigenem Bohrteam, an dem Tag, der in der Offerte steht. Ist die Zufahrt zu eng, hebt ein Kran das Gerät über das Haus.", "garten"),
+    ("Sondeneinbau und Verfüllung", "Wir bauen die Sonde ein und verfüllen das Bohrloch von unten nach oben dicht. So fliesst kein Wasser zwischen den Bodenschichten, und die Sonde bleibt Jahrzehnte im Boden.", None),
+    ("Druckprobe und Anbindung", "Jede Sonde wird mit Druck geprüft und im Protokoll festgehalten. Danach verlegen wir die Verbindungsleitungen zum Haus und setzen den Verteiler im Heizraum.", "verteiler"),
+    ("Befüllung und Übergabe", "Wir füllen Sonde und Leitungen mit Wärmeträgerflüssigkeit und übergeben die Anlage an Ihren Heizungsinstallateur. Bohrprotokoll und Rechnung für das Fördergesuch erhalten Sie mit.", None),
 ]
 
 # ---------------------------------------------------------------- Seiten
@@ -318,6 +308,8 @@ def schnitt_svg():
 <rect x="238" y="130" width="20" height="0" id="sonde" fill="#F0B23E" stroke="#14140F" stroke-width="4"/>
 <g id="bohrkopf"><polygon points="235,130 261,130 248,150" fill="#14140F"/></g>
 <line x1="330" y1="130" x2="330" y2="700" stroke="#14140F" stroke-width="3"/>
+<rect id="parzelle" x="4" y="124" width="324" height="26" fill="none" stroke="#F0B23E" stroke-width="6" stroke-dasharray="14 8" opacity="0"/>
+<g id="stempel" opacity="0" transform="rotate(-4 286 60)"><rect x="222" y="40" width="128" height="40" fill="#F0B23E" stroke="#14140F" stroke-width="4"/><text class="svg-text" x="234" y="66" style="font-size:17px;font-weight:500">BEWILLIGT</text></g>
 <g class="svg-text">{ticks}</g>
 </svg>"""
 
@@ -327,57 +319,53 @@ def seite_start():
          "title": "Erdsondenbohrung Zürich | Eco Green, Regensdorf",
          "og": "Eco Green: Wir bohren nach Wärme.",
          "desc": "Erdwärmesonden für Häuser im Kanton Zürich. Bohrfirma mit FWS-Gütesiegel aus Regensdorf, von der Abklärung bis zur befüllten Sonde. Jetzt Grundstück prüfen.",
-         "preload": '<link rel="preload" as="image" href="img/kran-800.webp" imagesrcset="img/kran-480.webp 480w, img/kran-800.webp 800w, img/kran-1200.webp 1200w" imagesizes="(max-width: 900px) 100vw, 40vw" fetchpriority="high">\n'}
+         "preload": preload("kran", "(max-width: 1320px) 100vw, 1240px")}
     s["schema"] = [{"@type": "WebSite", "@id": BASIS + "#website", "url": BASIS, "name": "Eco Green", "inLanguage": "de-CH", "publisher": {"@id": ORG_ID}},
                    faq_schema(FAQ)]
     p = ""
     schritte = "".join(
         f'<li class="schritt"><div class="nr"><span>{i + 1:02d}</span><span class="mono">{dauer}</span></div><h3>{t}</h3><p>{x}</p></li>'
         for i, (t, dauer, x) in enumerate(SCHRITTE))
-    zeilen = "".join(
-        f'<div class="zeile"><span class="mono">{i + 1:02d}</span><h3>{t}</h3><p>{x}</p></div>'
-        for i, (t, x, _e, _b) in enumerate(LEISTUNGEN))
     streifen = "".join(foto(p, k, a, c, sizes="(max-width: 640px) 78vw, 360px") for k, a, c in [
         ("garten", "Türkises Raupenbohrgerät im Garten eines Einfamilienhauses", "Bohrung im Garten eines Einfamilienhauses."),
         ("verteiler", "Zwei Sondenrohre mit Manometern während der Druckprobe", "Druckprobe an zwei Sonden."),
-        ("rot-logo", "Rotes Bohrgerät mit Eco-Green-Beschriftung vor einem Neubau", "Unser rotes Gerät auf einer Neubaustelle."),
+        ("rot-logo", "Antriebseinheit des roten Bohrgeräts mit Eco-Green-Beschriftung", "Das rote Gerät auf einer Neubaustelle."),
         ("feld", "Bohrgerät und Bagger am Siedlungsrand im Winter", "Bohrung am Siedlungsrand."),
         ("mast", "Bohrmast von unten gegen den Himmel", "Der Bohrmast, von unten."),
         ("rot-grube", "Raupenbohrgerät neben der Baugrube eines Neubaus", "Neubau, Bohrung vor dem Aushub."),
     ])
     body = f"""<section class="hero raster" aria-labelledby="h1">
- <div class="wrap hero-in">
-  <div>
-   <p class="mono">Erdwärmesonden · Regensdorf ZH</p>
-   <h1 id="h1">Wir bohren nach <span class="gruen-t">Wärme.</span></h1>
-   <p class="lead">Eco Green bohrt Erdwärmesonden für Häuser im Kanton Zürich. Mit eigenen Geräten, bis die Leitung in Ihrem Heizraum ankommt.</p>
-   <div class="knopfreihe"><a class="knopf" href="kontakt">Grundstück prüfen lassen <span class="pfeil">→</span></a><a class="knopf hell" href="{TEL_LINK}">{TEL}</a></div>
+ <div class="wrap">
+  <div class="hero-kopf">
+   <h1 id="h1">Wir bohren nach Wärme.</h1>
+   <div class="hero-text">
+    <p class="lead">Eco Green bohrt Erdwärmesonden für Häuser im Kanton Zürich. Mit eigenen Geräten, bis die Leitung in Ihrem Heizraum ankommt.</p>
+    <div class="knopfreihe"><a class="knopf" href="kontakt">Grundstück prüfen lassen <span class="pfeil">→</span></a><a class="knopf hell" href="{TEL_LINK}">{TEL}</a></div>
+   </div>
   </div>
-  <div class="hero-bild">
-   {foto(p, "kran", "Ein Kran hebt ein Raupenbohrgerät über ein Wohnhaus im Schnee", "Zu eng für die Zufahrt. Das Bohrgerät kommt mit dem Kran über das Haus.", lazy=False, prio=True)}
-   <a class="stempel" href="{FWS_PDF}" rel="noopener"><b>FWS-Gütesiegel</b><span class="mono">Bohrfirma für Erdwärmesonden, Liste Juli 2026</span></a>
-  </div>
+  {foto(p, "kran", "Ein Kran hebt ein Raupenbohrgerät über ein Wohnhaus im Schnee", "Zu eng für die Zufahrt. Das Bohrgerät kommt mit dem Kran über das Haus.", cls="hero-band", lazy=False, prio=True, sizes="(max-width: 1320px) 100vw, 1240px")}
  </div>
 </section>
-<section class="fakten" aria-label="Eco Green in Zahlen"><div class="wrap fakten-in">
- <div class="fakt"><span class="mono">Gütesiegel</span><b>seit 2021</b><p>Auf der Liste der FWS für Erdwärmesonden-Bohrfirmen. Eine von 45 Firmen in der Schweiz.</p></div>
- <div class="fakt"><span class="mono">Förderbeitrag</span><b>CHF 6'800</b><p>zahlt der Kanton Zürich an eine Erdwärmepumpe bis 15 kW, die Öl, Gas oder Strom ersetzt.</p></div>
- <div class="fakt"><span class="mono">Standort</span><b>Regensdorf</b><p>Pumpwerkstrasse 40, mitten im Furttal.</p></div>
- <div class="fakt"><span class="mono">Einsatzgebiet</span><b>Kanton ZH</b><p>{EINSATZ}.</p></div>
-</div></section>
+<section class="fakten" aria-label="Eco Green auf einen Blick">
+ <div class="wrap"><div class="fakten-in">
+  <a class="fakt fakt-siegel" href="{FWS_PDF}" rel="noopener"><span class="label">FWS-Gütesiegel</span><b>1 von 45</b><p>Bohrfirmen in der Schweiz mit dem Gütesiegel für Erdwärmesonden. Eco Green steht seit 2021 auf der Liste.</p></a>
+  <div class="fakt"><span class="label">Standort</span><b>Regensdorf ZH</b><p>Pumpwerkstrasse 40, im Furttal. Einsatz im {EINSATZ}.</p></div>
+  <a class="fakt" href="{TEL_LINK}"><span class="label">Telefon</span><b>{TEL}</b><p>{BUEROZEIT}.</p></a>
+ </div></div>
+</section>
 <section class="sektion" id="schnitt" aria-labelledby="schnitt-h">
  <div class="wrap">
   <div class="kopfzeile"><h2 id="schnitt-h">Was unter Ihrem Rasen passiert.</h2><p class="lead" style="max-width:28em">Ab etwa 15 Metern ist der Boden das ganze Jahr rund 10 Grad warm. Pro 100 Meter kommen etwa 3 Grad dazu. Diese Wärme holt die Sonde ins Haus.</p></div>
   <div class="schnitt-grid">
-   <div class="buehne" aria-hidden="false">
-    <div class="anzeige"><div><span class="mono">Tiefe</span><output data-tiefe>000 m</output></div><div><span class="mono">Boden</span><output data-temp>10,0 °C</output></div></div>
+   <div class="buehne">
+    <div class="anzeige"><div><span class="label">Tiefe</span><output data-tiefe>000 m</output></div><div><span class="label">Boden</span><output data-temp>10,0 °C</output></div></div>
     {schnitt_svg()}
     <p class="klein">Schema. Schichten und Tiefe sind an jedem Ort anders.</p>
    </div>
    <div>
     <div class="tiefenleiste" aria-hidden="true"><span data-tiefe>000 m</span><span class="balken"><i></i></span><span data-temp>10,0 °C</span></div>
     <ol class="schritte">{schritte}</ol>
-    <p style="margin-top:40px"><a class="textlink" href="ablauf">Der Ablauf im Detail</a></p>
+    <div class="knopfreihe" style="margin-top:40px"><a class="knopf hell" href="ablauf">Ablauf im Detail <span class="pfeil">→</span></a><a class="knopf hell" href="leistungen">Alle Leistungen <span class="pfeil">→</span></a></div>
    </div>
   </div>
  </div>
@@ -386,46 +374,39 @@ def seite_start():
  <div class="wrap foerder-grid">
   <p class="riesig auf"><small>Förderbeitrag ab</small>CHF 6'800</p>
   <div>
-   <h2 id="foerder-h">Erst das Gesuch. Dann die Bohrung.</h2>
-   <p class="lead" style="margin-top:24px">Der Kanton Zürich zahlt an eine Erdwärmepumpe bis 15 kW CHF 6'800, darüber CHF 420 pro zusätzliches kW. Als Baubeginn gilt die Bohrung. Wer bohrt, bevor das Gesuch eingereicht ist, verliert den Beitrag.</p>
-   <p>Im Gesuch verlangt der Kanton eine Bohrfirma mit gültigem Gütesiegel. Eco Green hat es seit 2021.</p>
+   <h2 id="foerder-h">Das Fördergesuch kommt vor der Bohrung.</h2>
+   <p class="lead" style="margin-top:24px">So viel zahlt der Kanton Zürich an eine Erdwärmepumpe bis 15 kW, die eine Öl-, Gas- oder Elektroheizung ersetzt. Darüber kommen CHF 420 pro kW dazu. Als Baubeginn gilt die Bohrung. Wer vorher bohrt, verliert den Beitrag.</p>
+   <p>Im Gesuch verlangt der Kanton eine Bohrfirma mit gültigem Gütesiegel. Eco Green hat es.</p>
    <div class="knopfreihe"><a class="knopf weiss" href="foerderung">Förderbeitrag berechnen <span class="pfeil">→</span></a></div>
    <p class="quelle">Quelle: Kanton Zürich, <a href="{ZH_FOERDER_PDF}" rel="noopener">Förderprogramm Heizung ersetzen</a>, Sole-Wasser-Wärmepumpe. Das Programm läuft <a href="{ZH_2026}" rel="noopener">2026 unverändert</a> weiter.</p>
   </div>
  </div>
 </section>
-<section class="sektion papier" aria-labelledby="leist-h">
- <div class="wrap">
-  <div class="kopfzeile"><h2 id="leist-h">Von der Berechnung bis zur befüllten Sonde.</h2><a class="textlink" href="leistungen">Alle Leistungen</a></div>
-  <div class="liste">{zeilen}</div>
- </div>
-</section>
 <section class="sektion dunkel" aria-labelledby="bau-h">
  <div class="wrap bau-grid">
-  {foto(p, "bohrmeister", "Bohrmeister im grünen Eco-Green-Shirt am Bohrgerät, daneben Bohrgestänge", "Eine Ansprechperson für die ganze Baustelle.", cls="auf")}
+  {foto(p, "bohrmeister", "Bohrmeister im grünen Eco-Green-Shirt am Bohrgerät, daneben Bohrgestänge", "Bohrmeister am Gerät.", cls="auf")}
   <div>
-   <p class="mono" style="color:var(--ocker)">Baustelle</p>
    <h2 id="bau-h">Bohren ist laut. Das sagen wir vorher.</h2>
    <p class="lead" style="margin-top:24px">Bohrgerät und Kompressor hört man in der Nachbarschaft. Darum arbeiten wir zu festen Zeiten und reden mit Ihren Nachbarn, bevor das Gerät kommt.</p>
    <dl class="regeln">
-    <div><dt>Arbeitszeit</dt><dd>Montag bis Freitag, 07.00 bis 12.00 und 13.00 bis 18.00 Uhr</dd></div>
-    <div><dt>Wochenende</dt><dd>Am Wochenende und an Feiertagen bohren wir nicht</dd></div>
-    <div><dt>Nachbarn</dt><dd>Brief mit Datum und Dauer eine Woche vor Bohrbeginn</dd></div>
+    <div><dt>Arbeitszeit</dt><dd>Montag bis Freitag, 07.00 bis 12.00 und 13.00 bis 18.00 Uhr.</dd></div>
+    <div><dt>Wochenende</dt><dd>Am Wochenende und an Feiertagen bohren wir nicht.</dd></div>
+    <div><dt>Nachbarn</dt><dd>Brief mit Datum und Dauer eine Woche vor Bohrbeginn.</dd></div>
     <div><dt>Bohrschlamm</dt><dd>In Mulden aufgefangen und fachgerecht entsorgt. Rasen und Zufahrt schützen wir mit Platten.</dd></div>
-    <div><dt>Ansprechperson</dt><dd>Eine Person für die ganze Baustelle, mit direkter Handynummer</dd></div>
+    <div><dt>Ansprechperson</dt><dd>Eine Person für die ganze Baustelle, mit direkter Handynummer.</dd></div>
    </dl>
   </div>
  </div>
 </section>
 <section class="sektion raster" aria-labelledby="bilder-h">
  <div class="wrap">
-  <div class="kopfzeile"><h2 id="bilder-h">Eigene Geräte. Echte Baustellen.</h2><a class="textlink" href="referenzen">Projektbeispiele</a></div>
+  <div class="kopfzeile"><h2 id="bilder-h">Baustellen</h2><a class="textlink" href="referenzen">Alle Bilder und Projektbeispiele</a></div>
   <div class="streifen" tabindex="0" aria-label="Fotos von Baustellen, seitlich scrollbar">{streifen}</div>
  </div>
 </section>
 <section class="sektion papier" aria-labelledby="faq-h">
  <div class="wrap faq-grid">
-  <div><h2 id="faq-h">Was Hausbesitzer zuerst fragen.</h2><p style="margin-top:24px">Ihre Frage fehlt? Rufen Sie an: <a href="{TEL_LINK}">{TEL}</a>.</p></div>
+  <div><h2 id="faq-h">Was Haus&shy;besitzer zuerst fragen.</h2><p style="margin-top:24px">Ihre Frage fehlt? Rufen Sie an: <a href="{TEL_LINK}">{TEL}</a>.</p></div>
   <div class="faq">{faq_html(FAQ)}</div>
  </div>
 </section>
@@ -439,21 +420,23 @@ def seite_leistungen():
          "desc": "Sondenauslegung, Bewilligungsunterlagen, Erdsondenbohrung, Sondeneinbau, Druckprobe und Anbindung an die Wärmepumpe. Alles von einer Bohrfirma mit Gütesiegel."}
     p = s["p"]
     s["schema"] = [{"@type": "Service", "name": t, "description": x, "serviceType": "Erdwärmesonde", "provider": {"@id": ORG_ID},
-                    "areaServed": {"@type": "AdministrativeArea", "name": "Kanton Zürich"}} for t, x, _e, _b in LEISTUNGEN]
+                    "areaServed": {"@type": "AdministrativeArea", "name": "Kanton Zürich"}} for t, x, _b in LEISTUNGEN]
+    for d in s["schema"]:
+        d["name"] = d["name"].replace("&shy;", "")
     reihen = ""
-    for i, (t, x, e, b) in enumerate(LEISTUNGEN):
-        rechts = f'<div class="ergebnis"><span class="mono">Ergebnis für Sie</span><p>{e}</p></div>'
+    for i, (t, x, b) in enumerate(LEISTUNGEN):
+        rechts = ""
         if b:
             alt = {"garten": "Raupenbohrgerät bohrt im Garten eines Einfamilienhauses", "verteiler": "Sondenverteiler mit zwei Manometern"}[b]
-            rechts += f'<div style="margin-top:32px">{foto(p, b, alt, sizes="(max-width: 900px) 100vw, 36vw")}</div>'
-        reihen += f'<article class="leistung auf"><span class="gross-nr">{i + 1:02d}</span><div><h2>{t}</h2><p class="lead">{x}</p></div><div>{rechts}</div></article>'
+            rechts = foto(p, b, alt, sizes="(max-width: 900px) 100vw, 36vw")
+        reihen += f'<article class="leistung auf{" mit-bild" if b else ""}"><span class="gross-nr">{i + 1:02d}</span><div><h2>{t}</h2><p class="lead">{x}</p></div>{f"<div>{rechts}</div>" if rechts else ""}</article>'
     body = seitenkopf(s, "Alles bis zur Hauswand.", "Eco Green bohrt Erdwärmesonden und schliesst sie an. Sie haben eine Ansprechperson vom ersten Anruf bis zum Bohrprotokoll.") + f"""
 <section class="sektion"><div class="wrap">{reihen}</div></section>
 <section class="sektion gruen-flaeche" aria-labelledby="inst-h">
  <div class="wrap zwei">
-  <div><p class="mono" style="color:var(--blatt)">Für Installateure und Planer</p><h2 id="inst-h">Sie planen die Wärmepumpe. Wir liefern die Sonde.</h2></div>
+  <div><h2 id="inst-h">Für Installateure und Planer.</h2></div>
   <div>
-   <p class="lead">Für Anlagen bis 15 kW verlangt der Kanton das Wärmepumpen-System-Modul, für die Förderung eine Bohrfirma mit Gütesiegel. Beides passt zusammen: Wir liefern Sondenlänge, Druckprotokoll und Bohrprotokoll so, wie Ihr Dossier sie braucht.</p>
+   <p class="lead">Sie planen die Wärmepumpe, wir liefern die Sonde. Für Anlagen bis 15 kW verlangt der Kanton das Wärmepumpen-System-Modul, für die Förderung eine Bohrfirma mit Gütesiegel. Sondenlänge, Druckprotokoll und Bohrprotokoll erhalten Sie so, wie Ihr Dossier sie braucht.</p>
    <p>Sie erhalten einen festen Bohrtermin und eine Ansprechperson, die auch Ihren Bauleiter kennt.</p>
    <div class="knopfreihe"><a class="knopf weiss" href="mailto:{MAIL}?subject={quote('Anfrage Installateur: Erdsonde')}">Projekt anfragen <span class="pfeil">→</span></a></div>
   </div>
@@ -478,7 +461,7 @@ def seite_ablauf():
          "desc": "Von der Abklärung im Wärmenutzungsatlas bis zur Übergabe: so läuft eine Erdsondenbohrung im Kanton Zürich ab. Mit Bewilligung, Förderung und Baustellenregeln."}
     p = s["p"]
     sie = [
-        "Sie schicken uns Adresse, Baujahr, heutige Heizung und Verbrauch. Fotos vom Heizraum helfen.",
+        "Sie schicken uns die fünf Angaben aus der E-Mail-Vorlage. Fotos vom Heizraum helfen.",
         "Sie unterschreiben das Bewilligungsgesuch und reichen es bei der Gemeinde ein. Das Fördergesuch reichen Sie auf der Gesuchplattform des Kantons ein, vor der Bohrung.",
         "Sie sorgen für Strom und Wasser auf dem Grundstück und eine freie Zufahrt.",
         "Nichts. Sie können zuschauen.",
@@ -495,7 +478,7 @@ def seite_ablauf():
     ]
     phasen = "".join(
         f'<article class="phase auf"><div class="phase-kopf"><span class="gross-nr">{i + 1:02d}</span><h2 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">{t}</h2><span class="mono">{dauer}</span></div>'
-        f'<div class="phase-inhalt"><div><h3>Was Sie tun</h3><p>{sie[i]}</p></div><div><h3>Was wir tun</h3><p>{wir[i]}</p></div></div></article>'
+        f'<div class="phase-inhalt"><div><h3 class="label">Was Sie tun</h3><p>{sie[i]}</p></div><div><h3 class="label">Was wir tun</h3><p>{wir[i]}</p></div></div></article>'
         for i, (t, dauer, _x) in enumerate(SCHRITTE))
     body = seitenkopf(s, "", "", extra=f"""<div class="split">
   <div><h1>Sechs Schritte bis zur warmen Stube.</h1><p class="lead">Von der ersten Anfrage bis zur Übergabe vergehen meist zwei bis drei Monate. Die meiste Zeit braucht die Bewilligung. Die Bohrung selbst dauert wenige Tage.</p></div>
@@ -505,8 +488,7 @@ def seite_ablauf():
 <section class="sektion raster" aria-labelledby="bew-h">
  <div class="wrap zwei">
   <div class="kasten auf">
-   <p class="mono">Bewilligung</p>
-   <h2 id="bew-h" style="font-size:clamp(1.8rem,3vw,2.6rem)">Was der Kanton verlangt.</h2>
+      <h2 id="bew-h" style="font-size:clamp(1.8rem,3vw,2.6rem)">Was der Kanton verlangt.</h2>
    <ul>
     <li>Jede Erdwärmesonde braucht eine gewässerschutzrechtliche Bewilligung des AWEL.</li>
     <li>Eingereicht wird bei der Baubehörde der Gemeinde, auch über eBaugesucheZH.</li>
@@ -516,9 +498,8 @@ def seite_ablauf():
    </ul>
    <p class="quelle">Quelle: <a href="{ZH_SONDEN}" rel="noopener">Kanton Zürich, Erdwärmesonden</a></p>
   </div>
-  <div class="kasten ocker-flaeche auf">
-   <p class="mono">Baustelle</p>
-   <h2 style="font-size:clamp(1.8rem,3vw,2.6rem)">Unsere Regeln vor Ort.</h2>
+  <div class="kasten kasten-ocker auf">
+      <h2 style="font-size:clamp(1.8rem,3vw,2.6rem)">Unsere Regeln vor Ort.</h2>
    <ul>
     <li>Gebohrt wird Montag bis Freitag, 07.00 bis 12.00 und 13.00 bis 18.00 Uhr.</li>
     <li>An Wochenenden und Feiertagen bleibt das Gerät still.</li>
@@ -534,6 +515,8 @@ def seite_ablauf():
 
 
 FOERDER_FAQ = [
+    ("Was zahlt der Kanton Zürich an eine Erdwärmepumpe?",
+     "<p>Bis 15 kW Heizleistung CHF 6'800, darüber CHF 420 pro zusätzliches kW. Bedingung ist, dass die Anlage eine Öl-, Gas- oder Elektroheizung in einem bestehenden Gebäude ersetzt. Das Gesuch muss vor der Bohrung eingereicht sein.</p>"),
     ("Wann muss ich das Fördergesuch einreichen?",
      "<p>Vor der Bohrung. Der Kanton zählt die Bohrung der Erdwärmesonde als Baubeginn. Sobald die automatische Eingangsbestätigung da ist, darf gebohrt werden. Die verbindliche Zusage folgt innert vier Wochen nach Eingang der vollständigen Unterlagen.</p>"),
     ("Bekomme ich auch beim Neubau einen Beitrag?",
@@ -550,7 +533,7 @@ def seite_foerderung():
          "desc": "Der Kanton Zürich zahlt ab CHF 6'800 an eine Erdwärmepumpe, die Öl, Gas oder Strom ersetzt. Bedingungen, Unterlagen, Rechner. Gesuch vor der Bohrung einreichen."}
     p = s["p"]
     s["schema"] = [faq_schema(FOERDER_FAQ)]
-    body = seitenkopf(s, "CHF 6'800 vom Kanton. Wenn Sie zuerst fragen.", "Der Kanton Zürich fördert den Ersatz von Öl-, Gas- und Elektroheizungen durch eine Erdwärmepumpe. Das Gesuch muss eingereicht sein, bevor wir bohren.") + f"""
+    body = seitenkopf(s, "CHF 6'800 vom Kanton Zürich.", "Der Kanton Zürich fördert den Ersatz von Öl-, Gas- und Elektroheizungen durch eine Erdwärmepumpe. Das Gesuch muss eingereicht sein, bevor wir bohren.") + f"""
 <section class="sektion" aria-labelledby="rechner-h">
  <div class="wrap">
   <div class="kopfzeile"><h2 id="rechner-h">Was der Kanton an Ihre Anlage zahlt.</h2></div>
@@ -562,7 +545,7 @@ def seite_foerderung():
     <p class="klein" style="margin-top:24px">Ein Einfamilienhaus braucht oft 8 bis 15 kW. Die genaue Leistung steht in der Offerte Ihres Installateurs.</p>
    </div>
    <div class="rechner-aus" aria-live="polite">
-    <span class="mono">Förderbeitrag Kanton Zürich</span>
+    <span class="label">Förderbeitrag Kanton Zürich</span>
     <p class="betrag" id="betrag">CHF 6'800</p>
     <div class="rechnung">
      <div><span>Grundbeitrag bis 15 kW</span><span id="r-grund">CHF 6'800</span></div>
@@ -578,7 +561,7 @@ def seite_foerderung():
 <section class="sektion papier" aria-labelledby="bed-h">
  <div class="wrap zwei">
   <div class="kasten auf">
-   <h2 id="bed-h" style="font-size:clamp(1.8rem,3vw,2.6rem)">Bedingungen</h2>
+   <h2 id="bed-h" style="font-size:clamp(1.8rem,3vw,2.6rem)">Bedingungen.</h2>
    <ul>
     <li>Die Anlage ersetzt eine Öl-, Gas- oder Elektroheizung.</li>
     <li>Das Gebäude besteht schon. Neubauten fördert der Kanton nicht.</li>
@@ -589,15 +572,15 @@ def seite_foerderung():
    </ul>
   </div>
   <div class="kasten auf">
-   <h2 style="font-size:clamp(1.8rem,3vw,2.6rem)">Unterlagen</h2>
-   <h3 class="mono" style="font-size:.8125rem;margin:18px 0 8px">Vor der Bohrung</h3>
+   <h2 style="font-size:clamp(1.8rem,3vw,2.6rem)">Unterlagen.</h2>
+   <h3 class="label" style="margin:18px 0 8px">Vor der Bohrung</h3>
    <ul>
     <li>Offerte für den Heizungsersatz</li>
     <li>Foto der alten Heizung und des Typenschilds</li>
     <li>Pläne mit der Energiebezugsfläche</li>
     <li>Bestätigung WPSM und Gütesiegel der Bohrfirma</li>
    </ul>
-   <h3 class="mono" style="font-size:.8125rem;margin:18px 0 8px">Nach dem Bau</h3>
+   <h3 class="label" style="margin:18px 0 8px">Nach dem Bau</h3>
    <ul>
     <li>Anlagezertifikat WPSM</li>
     <li>Rechnungen für Heizung und Bohrung</li>
@@ -609,7 +592,7 @@ def seite_foerderung():
 </section>
 <section class="sektion dunkel" aria-labelledby="gesetz-h">
  <div class="wrap zwei">
-  <h2 id="gesetz-h">Fossil raus, erneuerbar rein.</h2>
+  <h2 id="gesetz-h">Heizungsersatz im Kanton Zürich.</h2>
   <div>
    <p class="lead">Im Kanton Zürich darf eine Öl- oder Gasheizung in einem bestehenden Haus seit 01.09.2022 grundsätzlich nur noch durch ein erneuerbares System ersetzt werden.</p>
    <p>Eine Ausnahme gilt, wenn die erneuerbare Lösung über die ganze Lebensdauer mehr als 5 Prozent teurer ist. Im ersten Jahr wurden über 98 Prozent der ersetzten fossilen Heizungen durch klimaneutrale Systeme ersetzt.</p>
@@ -623,17 +606,17 @@ def seite_foerderung():
   <div class="faq">{faq_html(FOERDER_FAQ)}</div>
  </div>
 </section>
-{schluss(p, "Fördergesuch zuerst. Wir helfen dabei.", "Sie erhalten von uns die Offerte für die Bohrung und den Nachweis unseres Gütesiegels. Damit ist Ihr Gesuch vollständig, bevor das Gerät kommt.", "ocker-flaeche")}"""
+{schluss(p, "Unterlagen für Ihr Fördergesuch.", "Sie erhalten von uns die Offerte für die Bohrung und den Nachweis unseres Gütesiegels. Damit ist Ihr Gesuch vollständig, bevor das Gerät kommt.", "ocker-flaeche")}"""
     return s, body
 
 
 PROJEKTE = [
-    ("garten", "Einfamilienhaus", "Regensdorf", "Ölheizung", "2 Sonden à 180 m", "Bohrung im Garten, Zufahrt über den Vorplatz."),
-    ("kran", "Einfamilienhaus", "Zürcher Unterland", "Ölheizung", "1 Sonde à 230 m", "Zufahrt zu eng. Das Gerät kam mit dem Kran."),
-    ("feld", "Mehrfamilienhaus", "Furttal", "Gasheizung", "6 Sonden à 200 m", "Sondenfeld am Siedlungsrand, Anschluss an eine Heizzentrale."),
-    ("rot-grube", "Neubau", "Bezirk Dielsdorf", "Neubau", "3 Sonden à 160 m", "Bohrung vor dem Aushub, Sonden später ins Haus geführt."),
-    ("dorf", "Bauernhaus", "Zürcher Weinland", "Elektroheizung", "2 Sonden à 210 m", "Bohrung zwischen Bauernhaus und Wohnhaus."),
-    ("feld2", "Reihenhaus", "Limmattal", "Ölheizung", "1 Sonde à 200 m", "Eine Sonde reichte für das ganze Haus."),
+    ("Einfamilienhaus", "Regensdorf", "Ölheizung", "2 × 180 m", "Bohrung im Garten, Zufahrt über den Vorplatz"),
+    ("Einfamilienhaus", "Zürcher Unterland", "Ölheizung", "1 × 230 m", "Zufahrt zu eng, Gerät per Kran"),
+    ("Mehrfamilienhaus", "Furttal", "Gasheizung", "6 × 200 m", "Sondenfeld am Siedlungsrand"),
+    ("Neubau Doppelhaus", "Bezirk Dielsdorf", "keine, Neubau", "3 × 160 m", "Bohrung vor dem Aushub"),
+    ("Bauernhaus", "Zürcher Weinland", "Elektroheizung", "2 × 210 m", "Bohrung zwischen Bauernhaus und Wohnhaus"),
+    ("Reihenhaus", "Limmattal", "Ölheizung", "1 × 200 m", "eine Sonde für das ganze Haus"),
 ]
 
 def seite_referenzen():
@@ -641,30 +624,32 @@ def seite_referenzen():
          "title": "Erdsondenbohrung Referenzen | Eco Green Baustellen",
          "desc": "Baustellen von Eco Green: Erdsondenbohrungen für Einfamilienhäuser, Mehrfamilienhäuser und Neubauten im Kanton Zürich. Mit Kran, wenn die Zufahrt zu eng ist."}
     p = s["p"]
-    karten = "".join(f"""<article class="projekt{' auf' if i > 2 else ''}">{bild(p, k, f'{o}, {ort}: Bohrgerät auf der Baustelle', sizes='(max-width: 640px) 100vw, (max-width: 1020px) 50vw, 33vw', lazy=i > 0, prio=i == 0)}
-<div class="projekt-text"><span class="mono">Projektbeispiel {i + 1:02d}</span><h3>{o}, {ort}</h3><dl><div><dt>Ersetzt</dt><dd>{alt}</dd></div><div><dt>Sonden</dt><dd>{sonden}</dd></div></dl><p class="klein" style="margin:12px 0 0">{notiz}</p></div></article>"""
-                    for i, (k, o, ort, alt, sonden, notiz) in enumerate(PROJEKTE))
-    gal = "".join(foto(p, k, a, sizes="(max-width: 640px) 100vw, 25vw", cls="auf") for k, a in [
-        ("bohrmeister", "Bohrmeister von Eco Green am Bohrgerät"),
-        ("rot-logo", "Rotes Bohrgerät mit Eco-Green-Beschriftung"),
-        ("verteiler", "Sondenverteiler mit Manometern"),
-        ("mast", "Bohrmast von unten"),
-        ("raupe", "Fuss des Bohrmasts im Bohrschlamm"),
-        ("rot-nah", "Hydraulik am roten Bohrgerät"),
-        ("herbst", "Bohrgerät neben einer Baugrube im Herbst"),
-        ("garten", "Türkises Raupenbohrgerät im Garten"),
-    ])
-    body = seitenkopf(s, "Gebohrt, nicht gerendert.", "Alle Bilder auf dieser Website stammen von unseren eigenen Baustellen. So sehen Erdsondenbohrungen im Kanton Zürich aus.") + f"""
-<section class="sektion" aria-labelledby="proj-h">
+    zeilen = "".join(f"<tr><td data-label=\"Objekt\">{o}</td><td data-label=\"Region\">{ort}</td><td data-label=\"Ersetzt\">{alt}</td><td data-label=\"Sonden\" class=\"zahl\">{sonden}</td><td data-label=\"Besonderheit\">{notiz}</td></tr>"
+                     for o, ort, alt, sonden, notiz in PROJEKTE)
+    gal = "".join(foto(p, k, a, c, sizes="(max-width: 640px) 100vw, 25vw", cls="auf", lazy=i > 3, prio=i == 0) for i, (k, a, c) in enumerate([
+        ("garten", "Türkises Raupenbohrgerät im Garten eines Einfamilienhauses", "Garten eines Einfamilienhauses."),
+        ("dorf", "Bohrgerät zwischen Bauernhaus und Wohnhaus", "Zwischen Bauernhaus und Wohnhaus."),
+        ("feld", "Bohrgerät und Bagger am Siedlungsrand im Winter", "Siedlungsrand im Winter."),
+        ("rot-grube", "Rotes Raupenbohrgerät neben einer Baugrube", "Neubau, vor dem Aushub."),
+        ("herbst", "Bohrgerät neben einer Baugrube im Herbst", "Baugrube im Herbst."),
+        ("mast", "Bohrmast von unten", "Der Bohrmast."),
+        ("raupe", "Fuss des Bohrmasts im Bohrschlamm", "Bohrschlamm am Mastfuss."),
+        ("rot-nah", "Hydraulik am roten Bohrgerät", "Hydraulik am roten Gerät."),
+    ]))
+    body = seitenkopf(s, "Unsere Baustellen.", "Alle Bilder auf dieser Website stammen von Baustellen von Eco Green. So sehen Erdsondenbohrungen im Kanton Zürich aus.") + f"""
+<section class="sektion" aria-labelledby="gal-h">
  <div class="wrap">
-  <div class="kopfzeile"><h2 id="proj-h">Projektbeispiele.</h2><p style="max-width:30em">Vom Reihenhaus bis zum Mehrfamilienhaus. Sondenzahl und Tiefe richten sich nach dem Haus, nicht nach dem Katalog.</p></div>
-  <div class="projekte">{karten}</div>
+  <div class="kopfzeile"><h2 id="gal-h">Geräte und Baustellen.</h2><p style="max-width:30em">Raupenbohrgeräte, die durch ein Gartentor passen. Und wenn nicht, über das Dach.</p></div>
+  <div class="galerie">{gal}</div>
  </div>
 </section>
-<section class="sektion dunkel" aria-labelledby="gal-h">
+<section class="sektion papier" aria-labelledby="proj-h">
  <div class="wrap">
-  <div class="kopfzeile"><h2 id="gal-h">Unsere Geräte.</h2><p style="max-width:30em">Raupenbohrgeräte, die durch ein Gartentor passen. Und wenn nicht, über das Dach.</p></div>
-  <div class="galerie">{gal}</div>
+  <div class="kopfzeile"><h2 id="proj-h">Typische Aufträge.</h2><p style="max-width:30em">Sondenzahl und Tiefe richten sich nach dem Haus. Diese Beispiele zeigen die Spannweite.</p></div>
+  <div class="tabelle-rahmen auf"><table class="tabelle">
+   <thead><tr><th scope="col">Objekt</th><th scope="col">Region</th><th scope="col">Ersetzt</th><th scope="col">Sonden</th><th scope="col">Besonderheit</th></tr></thead>
+   <tbody>{zeilen}</tbody>
+  </table></div>
  </div>
 </section>
 {schluss(p, "Ihr Haus als nächste Baustelle?")}"""
@@ -672,13 +657,13 @@ def seite_referenzen():
 
 
 def seite_ueber():
-    s = {"slug": "ueber-uns", "p": "", "ogbild": "og-ueber-uns", "preload": preload("rot-logo", "(max-width: 900px) 100vw, 40vw"), "spur": [("ueber-uns", "Über uns")],
+    s = {"slug": "ueber-uns", "p": "", "ogbild": "og-ueber-uns", "preload": preload("bohrmeister", "(max-width: 900px) 100vw, 40vw"), "spur": [("ueber-uns", "Über uns")],
          "title": "Bohrfirma mit FWS-Gütesiegel in Regensdorf | Eco Green",
          "desc": "Eco Green GmbH ist eine Bohrfirma für Erdwärmesonden an der Pumpwerkstrasse 40 in Regensdorf. Mit FWS-Gütesiegel seit 2021 und eigenen Raupenbohrgeräten."}
     p = s["p"]
     body = seitenkopf(s, "", "", extra=f"""<div class="split">
   <div><h1>Bohrfirma aus dem Furttal.</h1><p class="lead">Eco Green GmbH bohrt Erdwärmesonden für Einfamilienhäuser, Mehrfamilienhäuser und Neubauten. Von Regensdorf aus fahren wir mit eigenen Geräten zu Baustellen im ganzen Kanton.</p></div>
-  {foto(p, "rot-logo", "Rotes Raupenbohrgerät mit Eco-Green-Beschriftung", "Eines unserer Raupenbohrgeräte.", lazy=False, prio=True)}
+  {foto(p, "bohrmeister", "Bohrmeister im grünen Eco-Green-Shirt am Bohrgerät", "Bohrmeister von Eco Green.", lazy=False, prio=True)}
  </div>""") + f"""
 <section class="sektion" aria-labelledby="daten-h">
  <div class="wrap zwei">
@@ -696,7 +681,7 @@ def seite_ueber():
 </section>
 <section class="sektion ocker-flaeche" aria-labelledby="siegel-h">
  <div class="wrap zwei">
-  <div><p class="mono">FWS-Gütesiegel</p><h2 id="siegel-h">Eine von 45.</h2></div>
+  <div><h2 id="siegel-h">Eine von 45 Bohrfirmen mit Gütesiegel.</h2></div>
   <div>
    <p class="lead">45 Bohrfirmen in der Schweiz tragen das Gütesiegel der Fachvereinigung Wärmepumpen Schweiz. Eco Green ist seit 2021 dabei.</p>
    <p>Wer es trägt, verpflichtet sich auf Beratung der Bauherrschaft, umweltschonende Ausführung, Bohrungen nach dem Stand der Technik, hochwertiges Sondenmaterial und Sicherheit auf der Baustelle. Das AWEL empfiehlt Firmen mit diesem Siegel, und der Kanton verlangt es für den Förderbeitrag.</p>
@@ -705,18 +690,19 @@ def seite_ueber():
  </div>
 </section>
 <section class="sektion papier" aria-labelledby="leute-h">
- <div class="wrap">
-  <div class="kopfzeile"><h2 id="leute-h">Wer bei uns entscheidet.</h2><p style="max-width:30em">Auf der Baustelle steht ein eigenes Bohrteam. Im Büro sind die Wege kurz.</p></div>
-  <div class="personen">
-   <article class="person auf"><div class="kuerzel" aria-hidden="true">ES</div><h3>Etiènne Spruijt</h3><p class="mono">Inhaber, Vorsitzender der Geschäftsführung</p><p>Verantwortlich für Bohrungen und Geräte.</p></article>
-   <article class="person auf"><div class="kuerzel" aria-hidden="true">MG</div><h3>Mahissa Ganz-Yasri</h3><p class="mono">Geschäftsführerin</p><p>Ansprechperson für Offerten und Termine.</p></article>
-  </div>
+ <div class="wrap zwei">
+  <h2 id="leute-h">Geschäftsführung.</h2>
+  <dl class="daten">
+   <div><dt>Etiènne Spruijt</dt><dd>Inhaber und Vorsitzender der Geschäftsführung. Bohrungen und Geräte.</dd></div>
+   <div><dt>Mahissa Ganz-Yasri</dt><dd>Geschäftsführerin. Offerten und Termine.</dd></div>
+   <div><dt>Bohrteam</dt><dd>Eigenes Bohrpersonal auf jeder Baustelle.</dd></div>
+  </dl>
  </div>
 </section>
 <section class="sektion raster" aria-labelledby="ort-h">
  <div class="wrap zwei">
-  <div><h2 id="ort-h">Pumpwerkstrasse 40, Regensdorf.</h2><p class="lead" style="margin-top:24px">Von hier sind Furttal, Zürcher Unterland und Limmattal schnell erreicht. Die Stadt Zürich auch.</p></div>
-  <div class="kasten"><p class="mono">Adresse</p><address style="font-style:normal;font-size:1.25rem;font-weight:650;margin:10px 0 20px">Eco Green GmbH<br>Pumpwerkstrasse 40<br>8105 Regensdorf</address><a class="textlink" href="{KARTE}" rel="noopener">Auf der Karte zeigen</a></div>
+  <div><h2 id="ort-h">Pumpwerk&shy;strasse 40, Regensdorf.</h2><p class="lead" style="margin-top:24px">Von hier sind Furttal, Zürcher Unterland und Limmattal schnell erreicht. Die Stadt Zürich auch.</p></div>
+  <div class="kasten"><p class="label">Adresse</p><address style="font-style:normal;font-size:1.25rem;font-weight:650;margin:10px 0 20px">Eco Green GmbH<br>Pumpwerkstrasse 40<br>8105 Regensdorf</address><a class="textlink" href="{KARTE}" rel="noopener">Auf der Karte zeigen</a></div>
  </div>
 </section>
 {schluss(p)}"""
@@ -729,30 +715,30 @@ def seite_kontakt():
          "desc": "Erstabklärung für Ihre Erdwärmesonde: rufen Sie an unter 044 400 20 20 oder schreiben Sie an info@eco-green.ch. Eco Green GmbH, Pumpwerkstrasse 40, Regensdorf."}
     p = s["p"]
     s["schema"] = [{"@type": "ContactPage", "url": BASIS + "kontakt", "about": {"@id": ORG_ID}}]
-    body = seitenkopf(s, "Rufen Sie an. Oder schreiben Sie.", f"Für die Erstabklärung brauchen wir fünf Angaben. Das Gespräch dauert zehn Minuten, die Einschätzung ist kostenlos.") + f"""
+    body = seitenkopf(s, "Erstabklärung für Ihr Grundstück.", "Für die Erstabklärung brauchen wir fünf Angaben. Das Gespräch dauert zehn Minuten, die Einschätzung ist kostenlos.") + f"""
 <section class="sektion" aria-label="Telefon und E-Mail">
  <div class="wrap">
   <div class="kontakt-gross auf">
-   <a href="{TEL_LINK}"><span class="mono">Telefon</span><b>{TEL}</b><span class="klein" style="display:block;margin-top:14px">{BUEROZEIT}</span></a>
-   <a href="{MAILTO}"><span class="mono">E-Mail mit Vorlage</span><b>{MAIL}</b><span class="klein" style="display:block;margin-top:14px">Antwort innert zwei Arbeitstagen</span></a>
+   <a href="{TEL_LINK}"><span class="label">Telefon</span><b>{TEL}</b><span class="klein" style="display:block;margin-top:14px">{BUEROZEIT}</span></a>
+   <a href="{MAILTO}"><span class="label">E-Mail mit Vorlage</span><b>{MAIL}</b><span class="klein" style="display:block;margin-top:14px">Antwort innert zwei Arbeitstagen</span></a>
   </div>
  </div>
 </section>
 <section class="sektion papier" aria-labelledby="brauchen-h">
  <div class="wrap zwei">
-  <div><h2 id="brauchen-h">Das brauchen wir von Ihnen.</h2><p class="lead" style="margin-top:24px">Die E-Mail-Vorlage fragt genau das ab. Sie müssen nur ausfüllen.</p></div>
+  <div><h2 id="brauchen-h">Das brauchen wir von Ihnen.</h2><p class="lead" style="margin-top:24px">Die E-Mail-Vorlage fragt genau das ab. Öffnet sich bei Ihnen kein Mailprogramm, kopieren Sie die Vorlage und schicken Sie sie an {MAIL}.</p><div class="knopfreihe"><button class="knopf hell kopieren" type="button" data-text="{esc(MAIL_TEXT)}">Vorlage kopieren</button></div><p class="klein kopiert" role="status"></p></div>
   <ol class="checkliste">
    <li><span><b>Adresse des Grundstücks.</b> Damit prüfen wir im Wärmenutzungsatlas, ob gebohrt werden darf.</span></li>
-   <li><span><b>Heutige Heizung.</b> Öl, Gas oder Elektro, mit Baujahr. Davon hängt der Förderbeitrag ab.</span></li>
+   <li><span><b>Heutige Heizung.</b> Öl, Gas oder Elektro, mit dem Baujahr der Heizung. Davon hängt der Förderbeitrag ab.</span></li>
    <li><span><b>Verbrauch pro Jahr.</b> Liter Öl, Kubikmeter Gas oder Kilowattstunden. Daraus rechnen wir die Sondenlänge.</span></li>
-   <li><span><b>Baujahr und Fläche des Hauses.</b> Eine grobe Angabe reicht.</span></li>
+   <li><span><b>Baujahr und Wohnfläche des Hauses.</b> Eine grobe Angabe reicht.</span></li>
    <li><span><b>Telefonnummer.</b> Für den Rückruf und den Termin vor Ort.</span></li>
   </ol>
  </div>
 </section>
-<section class="sektion dunkel" aria-labelledby="adr-h">
+<section class="sektion gruen-flaeche" aria-labelledby="adr-h">
  <div class="wrap zwei">
-  <div><h2 id="adr-h">Büro und Werkhof.</h2></div>
+  <div><h2 id="adr-h">Büro in Regensdorf.</h2></div>
   <div>
    <address class="lead" style="font-style:normal">Eco Green GmbH<br>Pumpwerkstrasse 40<br>8105 Regensdorf</address>
    <p style="margin-top:20px">{BUEROZEIT}</p>

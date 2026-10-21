@@ -34,15 +34,18 @@
   /* Bohrung zum Scrollen */
   var schnitt = d.getElementById("schnitt");
   if (schnitt) {
-    var liste = schnitt.querySelector(".schritte"), schritte = schnitt.querySelectorAll(".schritt");
+    var schritte = schnitt.querySelectorAll(".schritt");
     var rohr = d.getElementById("sonde"), kopf = d.getElementById("bohrkopf");
     var tiefe = d.querySelectorAll("[data-tiefe]"), temp = d.querySelectorAll("[data-temp]"), balken = d.querySelector(".tiefenleiste i");
     var ZIEL = 220, PRO_M = 2.2, laeuft = false;
     function temperatur(m) { return m < 15 ? 10 : 10 + (m - 15) * 0.03; }
+    var parzelle = d.getElementById("parzelle"), stempel = d.getElementById("stempel");
     function zeichne() {
       laeuft = false;
-      var r = liste.getBoundingClientRect(), vh = window.innerHeight;
-      var p = (vh * 0.55 - r.top) / Math.max(1, r.height - vh * 0.25);
+      var vh = window.innerHeight, mitte = vh * 0.5;
+      /* Gebohrt wird erst in Schritt 03, bis Schritt 04 ist die Sonde unten */
+      var a = schritte[2].getBoundingClientRect().top, b = schritte[3].getBoundingClientRect().top;
+      var p = (mitte - a) / Math.max(1, b - a);
       p = Math.min(1, Math.max(0, p));
       var m = Math.round(p * ZIEL);
       if (rohr) { rohr.setAttribute("height", Math.max(0, m * PRO_M)); }
@@ -50,15 +53,26 @@
       tiefe.forEach(function (t) { t.textContent = String(m).padStart(3, "0") + " m"; });
       temp.forEach(function (t) { t.textContent = temperatur(m).toFixed(1).replace(".", ",") + " °C"; });
       if (balken) balken.style.width = (p * 100) + "%";
-      var mitte = vh * 0.5, aktiv = 0;
+      var aktiv = -1;
       schritte.forEach(function (s, i) { if (s.getBoundingClientRect().top < mitte) aktiv = i; });
-      schritte.forEach(function (s, i) { s.classList.toggle("aktiv", i === aktiv && p > 0); });
+      schritte.forEach(function (s, i) { s.classList.toggle("aktiv", i === aktiv); });
+      if (parzelle) parzelle.setAttribute("opacity", aktiv === 0 ? "1" : "0");
+      if (stempel) stempel.setAttribute("opacity", aktiv >= 1 ? "1" : "0");
     }
     function anstoss() { if (!laeuft) { laeuft = true; requestAnimationFrame(zeichne); } }
     window.addEventListener("scroll", anstoss, { passive: true });
     window.addEventListener("resize", anstoss);
     requestAnimationFrame(zeichne);
   }
+
+  /* Mailvorlage kopieren, fuer Webmail ohne Mailprogramm */
+  d.querySelectorAll(".kopieren").forEach(function (k) {
+    k.addEventListener("click", function () {
+      var meldung = d.querySelector(".kopiert");
+      var fertig = function () { if (meldung) meldung.textContent = "Vorlage kopiert. Fügen Sie sie in eine neue E-Mail an info@eco-green.ch ein."; };
+      if (navigator.clipboard) { navigator.clipboard.writeText(k.getAttribute("data-text")).then(fertig, function () {}); }
+    });
+  });
 
   /* Foerderrechner, Saetze Kanton Zuerich */
   var rechner = d.getElementById("rechner");

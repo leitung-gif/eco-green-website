@@ -75,11 +75,14 @@ def fotos():
 
 # ---------- Logo als Vektor ----------
 
-def _pfade(maske: np.ndarray, eps: float) -> str:
+def _pfade(maske: np.ndarray, eps: float, min_hoehe: int = 0, unten: int = 0) -> str:
     cnts, _ = cv2.findContours(maske, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
     teile = []
     for c in cnts:
         if cv2.contourArea(c) < 6:
+            continue
+        x_, y_, w_, h_ = cv2.boundingRect(c)
+        if min_hoehe and h_ < min_hoehe and y_ > unten:
             continue
         a = cv2.approxPolyDP(c, eps, True)[:, 0, :]
         if len(a) < 3:
@@ -104,11 +107,20 @@ def logo_svg():
         m = cv2.GaussianBlur(m, (5, 5), 0)
         return (m > 127).astype(np.uint8) * 255
 
-    pg = _pfade(glatt(gruen), 1.2)
-    pa = _pfade(glatt(grau_), 1.2)
+    UNTEN = int(big.height * 0.70)
+    pg = _pfade(glatt(gruen), 1.2, min_hoehe=int(big.height * 0.18), unten=UNTEN)
+    # ohne die feinen Linien und die URL-Zeile unter «green»: nur Formen ab 18 Prozent der Logohoehe
+    pa = _pfade(glatt(grau_), 1.2, min_hoehe=int(big.height * 0.18), unten=UNTEN)
     W, H = big.size
     # enger Rahmen
-    ys, xs = np.where(alpha > 110)
+    keep = np.zeros(alpha.shape, np.uint8)
+    for m_, mh in ((glatt(gruen), 0), (glatt(grau_), int(big.height * 0.18))):
+        cs, _ = cv2.findContours(m_, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        for c in cs:
+            bx, by, bw, bh = cv2.boundingRect(c)
+            if cv2.contourArea(c) >= 6 and (bh >= int(big.height * 0.18) or by <= UNTEN):
+                cv2.drawContours(keep, [c], -1, 255, -1)
+    ys, xs = np.where(keep > 0)
     x0, y0, x1, y1 = xs.min() - 4, ys.min() - 4, xs.max() + 4, ys.max() + 4
     vb = f"{x0} {y0} {x1 - x0} {y1 - y0}"
     def svg(c1, c2):
@@ -195,10 +207,10 @@ if __name__ == "__main__":
     for n, a, b, f, o in [
         ("og-leistungen", "Alles bis zur", "Hauswand.", "b_4.05.jpg", 0.4),
         ("og-ablauf", "Sechs Schritte", "bis zur Wärme.", "w_WhatsApp-Image-2022-02-16-at-06.21.58.jpg", 0.5),
-        ("og-foerderung", "CHF 6'800", "vom Kanton.", "b_3.05.jpg", 0.5),
-        ("og-referenzen", "Gebohrt,", "nicht gerendert.", "w_WhatsApp-Image-2022-02-16-at-06.21.58-21.jpg", 0.5),
+        ("og-foerderung", "CHF 6'800", "vom Kanton Zürich.", "b_3.05.jpg", 0.5),
+        ("og-referenzen", "Unsere", "Baustellen.", "w_WhatsApp-Image-2022-02-16-at-06.21.58-21.jpg", 0.5),
         ("og-ueber-uns", "Bohrfirma aus", "dem Furttal.", "w_WhatsApp-Image-2022-02-16-at-06.22.09.jpg", 0.5),
-        ("og-kontakt", "Rufen Sie an.", "044 400 20 20", "b_6.05.jpg", 0.4),
+        ("og-kontakt", "Erstabklärung", "044 400 20 20", "b_6.05.jpg", 0.4),
     ]:
         og_bild(n, a, b, f, o)
     import json
