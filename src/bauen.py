@@ -350,7 +350,7 @@ def seite_start():
  <div class="wrap"><div class="fakten-in">
   <a class="fakt fakt-siegel" href="{FWS_PDF}" rel="noopener"><span class="label">FWS-Gütesiegel</span><b>1 von 45</b><p>Bohrfirmen in der Schweiz mit dem Gütesiegel für Erdwärmesonden. Eco Green steht seit 2021 auf der Liste.</p></a>
   <div class="fakt"><span class="label">Standort</span><b>Regensdorf ZH</b><p>Pumpwerkstrasse 40, im Furttal. Einsatz im {EINSATZ}.</p></div>
-  <a class="fakt" href="{TEL_LINK}"><span class="label">Telefon</span><b>{TEL}</b><p>{BUEROZEIT}.</p></a>
+  <div class="fakt"><span class="label">Dauer</span><b>2 bis 3 Monate</b><p>von der ersten Anfrage bis zur Übergabe. Die Bohrung selbst dauert wenige Tage.</p></div>
  </div></div>
 </section>
 <section class="sektion" id="schnitt" aria-labelledby="schnitt-h">
@@ -515,8 +515,6 @@ def seite_ablauf():
 
 
 FOERDER_FAQ = [
-    ("Was zahlt der Kanton Zürich an eine Erdwärmepumpe?",
-     "<p>Bis 15 kW Heizleistung CHF 6'800, darüber CHF 420 pro zusätzliches kW. Bedingung ist, dass die Anlage eine Öl-, Gas- oder Elektroheizung in einem bestehenden Gebäude ersetzt. Das Gesuch muss vor der Bohrung eingereicht sein.</p>"),
     ("Wann muss ich das Fördergesuch einreichen?",
      "<p>Vor der Bohrung. Der Kanton zählt die Bohrung der Erdwärmesonde als Baubeginn. Sobald die automatische Eingangsbestätigung da ist, darf gebohrt werden. Die verbindliche Zusage folgt innert vier Wochen nach Eingang der vollständigen Unterlagen.</p>"),
     ("Bekomme ich auch beim Neubau einen Beitrag?",
@@ -606,7 +604,7 @@ def seite_foerderung():
   <div class="faq">{faq_html(FOERDER_FAQ)}</div>
  </div>
 </section>
-{schluss(p, "Unterlagen für Ihr Fördergesuch.", "Sie erhalten von uns die Offerte für die Bohrung und den Nachweis unseres Gütesiegels. Damit ist Ihr Gesuch vollständig, bevor das Gerät kommt.", "ocker-flaeche")}"""
+{schluss(p, "Offerte und Siegelnachweis von uns.", "Sie erhalten von uns die Offerte für die Bohrung und den Nachweis unseres Gütesiegels. Damit ist Ihr Gesuch vollständig, bevor das Gerät kommt.", "ocker-flaeche")}"""
     return s, body
 
 
@@ -639,7 +637,7 @@ def seite_referenzen():
     body = seitenkopf(s, "Unsere Baustellen.", "Alle Bilder auf dieser Website stammen von Baustellen von Eco Green. So sehen Erdsondenbohrungen im Kanton Zürich aus.") + f"""
 <section class="sektion" aria-labelledby="gal-h">
  <div class="wrap">
-  <div class="kopfzeile"><h2 id="gal-h">Geräte und Baustellen.</h2><p style="max-width:30em">Raupenbohrgeräte, die durch ein Gartentor passen. Und wenn nicht, über das Dach.</p></div>
+  <h2 id="gal-h" class="sr">Fotos von Baustellen</h2>
   <div class="galerie">{gal}</div>
  </div>
 </section>

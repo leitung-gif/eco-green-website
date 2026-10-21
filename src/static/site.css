@@ -266,6 +266,8 @@ a.fakt-siegel:hover{background:#F5C35E}
 .tabelle tbody tr:hover{background:var(--blatt)}
 .galerie{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
 .galerie .foto img{aspect-ratio:3/4}
+.galerie .foto{display:flex;flex-direction:column}
+.galerie .foto figcaption{flex:1}
 
 /* Ueber uns */
 .daten{margin:0;border-top:var(--rand) solid var(--tinte)}
