@@ -5,7 +5,7 @@
  "start_url": "/eco-green-website/",
  "scope": "/eco-green-website/",
  "display": "standalone",
- "background_color": "#F2EEE3",
+ "background_color": "#FFFFFF",
  "theme_color": "#29662F",
  "icons": [
   {

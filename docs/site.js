@@ -1,4 +1,4 @@
-/* Eco Green: Menue, Bohrung zum Scrollen, Einblenden, Foerderrechner. Ohne Bibliotheken. */
+/* Eco Green: Menue, Sonde im Schema, Mailvorlage, Foerderrechner. Ohne Bibliotheken. */
 (function () {
   "use strict";
   var d = document;
@@ -7,7 +7,6 @@
   /* Menue */
   var menue = d.getElementById("menue"), auf = d.querySelector(".menuknopf"), zu = d.querySelector(".menue-zu");
   function setze(offen) {
-    if (!menue) return;
     menue.classList.toggle("offen", offen);
     menue.setAttribute("aria-hidden", offen ? "false" : "true");
     if (offen) { menue.removeAttribute("inert"); } else { menue.setAttribute("inert", ""); }
@@ -22,47 +21,19 @@
     menue.addEventListener("click", function (e) { if (e.target.closest("a")) setze(false); });
   }
 
-  /* Einblenden */
-  var teile = d.querySelectorAll(".auf");
-  if ("IntersectionObserver" in window && !ruhig) {
+  /* Sonde im Schema: wird einmal in die Tiefe gezeichnet, sobald das Schema sichtbar ist */
+  var schema = d.querySelector(".schema"), sonde = d.getElementById("sonde");
+  if (schema && sonde && "IntersectionObserver" in window && !ruhig) {
+    var ziel = sonde.getAttribute("height");
+    sonde.setAttribute("height", "0");
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("da"); io.unobserve(e.target); } });
-    }, { rootMargin: "0px 0px -8% 0px" });
-    teile.forEach(function (t) { io.observe(t); });
-  } else { teile.forEach(function (t) { t.classList.add("da"); }); }
-
-  /* Bohrung zum Scrollen */
-  var schnitt = d.getElementById("schnitt");
-  if (schnitt) {
-    var schritte = schnitt.querySelectorAll(".schritt");
-    var rohr = d.getElementById("sonde"), kopf = d.getElementById("bohrkopf");
-    var tiefe = d.querySelectorAll("[data-tiefe]"), temp = d.querySelectorAll("[data-temp]"), balken = d.querySelector(".tiefenleiste i");
-    var ZIEL = 220, PRO_M = 2.2, laeuft = false;
-    function temperatur(m) { return m < 15 ? 10 : 10 + (m - 15) * 0.03; }
-    var parzelle = d.getElementById("parzelle"), stempel = d.getElementById("stempel");
-    function zeichne() {
-      laeuft = false;
-      var vh = window.innerHeight, mitte = vh * 0.5;
-      /* Gebohrt wird erst in Schritt 03, bis Schritt 04 ist die Sonde unten */
-      var a = schritte[2].getBoundingClientRect().top, b = schritte[3].getBoundingClientRect().top;
-      var p = (mitte - a) / Math.max(1, b - a);
-      p = Math.min(1, Math.max(0, p));
-      var m = Math.round(p * ZIEL);
-      if (rohr) { rohr.setAttribute("height", Math.max(0, m * PRO_M)); }
-      if (kopf) { kopf.setAttribute("transform", "translate(0," + (m * PRO_M) + ")"); }
-      tiefe.forEach(function (t) { t.textContent = String(m).padStart(3, "0") + " m"; });
-      temp.forEach(function (t) { t.textContent = temperatur(m).toFixed(1).replace(".", ",") + " °C"; });
-      if (balken) balken.style.width = (p * 100) + "%";
-      var aktiv = -1;
-      schritte.forEach(function (s, i) { if (s.getBoundingClientRect().top < mitte) aktiv = i; });
-      schritte.forEach(function (s, i) { s.classList.toggle("aktiv", i === aktiv); });
-      if (parzelle) parzelle.setAttribute("opacity", aktiv === 0 ? "1" : "0");
-      if (stempel) stempel.setAttribute("opacity", aktiv >= 1 ? "1" : "0");
-    }
-    function anstoss() { if (!laeuft) { laeuft = true; requestAnimationFrame(zeichne); } }
-    window.addEventListener("scroll", anstoss, { passive: true });
-    window.addEventListener("resize", anstoss);
-    requestAnimationFrame(zeichne);
+      if (es[0].isIntersecting) {
+        schema.classList.add("bereit");
+        requestAnimationFrame(function () { sonde.setAttribute("height", ziel); sonde.style.height = ziel + "px"; });
+        io.disconnect();
+      }
+    }, { threshold: 0.35 });
+    io.observe(schema);
   }
 
   /* Mailvorlage kopieren, fuer Webmail ohne Mailprogramm */

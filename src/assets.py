@@ -17,7 +17,7 @@ IMG.mkdir(parents=True, exist_ok=True)
 
 GRUEN = (41, 102, 47)      # #29662F, Logo gemessen
 TINTE = (20, 20, 15)
-KALK = (242, 238, 227)
+KALK = (243, 247, 239)
 OCKER = (240, 178, 62)
 
 # Fotos: Schluessel -> (Datei, Ausschnitt als Anteil links, oben, rechts, unten)
@@ -47,7 +47,7 @@ def grau(im: Image.Image) -> Image.Image:
     lut = [int(255 * ((i / 255) ** 1.08)) for i in range(256)]
     g = g.point(lut)
     # leichte warme Tonung, damit das Grau zum Kalkgrund passt
-    warm = ImageOps.colorize(g, black=(18, 18, 14), white=(246, 243, 235), mid=(128, 126, 119))
+    warm = ImageOps.colorize(g, black=(16, 21, 17), white=(250, 251, 248), mid=(124, 129, 123))
     return warm
 
 
@@ -167,7 +167,6 @@ def og_bild(name="og", z1="Wir bohren", z2="nach Wärme.", fotokey="b_5.05.jpg",
     fw, fh = 470, 630
     foto = ImageOps.fit(foto, (fw, fh), Image.LANCZOS, centering=(0.5, oben))
     im.paste(foto, (W - fw, 0))
-    d.rectangle([W - fw - 6, 0, W - fw, H], fill=TINTE)
     ttf = HIER / "schibsted.ttf"
     def schrift(px, wght):
         f = ImageFont.truetype(str(ttf), px)
@@ -181,7 +180,7 @@ def og_bild(name="og", z1="Wir bohren", z2="nach Wärme.", fotokey="b_5.05.jpg",
     logo = Image.open(ROH / "logo_Ecogreen_1.png").convert("RGBA")
     logo.thumbnail((250, 100), Image.LANCZOS)
     im.paste(logo, (64, 56), logo)
-    d.text((64, 200), "ERDWÄRMESONDEN · REGENSDORF ZH", font=mono, fill=TINTE)
+    d.text((64, 200), "ERDSONDENBOHRUNGEN · REGENSDORF ZH", font=mono, fill=GRUEN)
     px = 88
     while px > 50:
         t = schrift(px, 850)
@@ -192,10 +191,8 @@ def og_bild(name="og", z1="Wir bohren", z2="nach Wärme.", fotokey="b_5.05.jpg",
     d.text((60, 240 + int(px * 1.09)), z2, font=t, fill=GRUEN)
     # Siegel-Kasten mit hartem Schatten
     x, y, w, h = 64, 488, 520, 78
-    d.rectangle([x + 8, y + 8, x + w + 8, y + h + 8], fill=TINTE)
-    d.rectangle([x, y, x + w, y + h], fill=OCKER, outline=TINTE, width=4)
-    d.text((x + 22, y + 24), "FWS-GÜTESIEGEL FÜR BOHRFIRMEN", font=mono, fill=TINTE)
-    d.rectangle([0, 0, W - 1, H - 1], outline=TINTE, width=6)
+    d.rectangle([x, y, x + w, y + h], fill=GRUEN)
+    d.text((x + 22, y + 24), "FWS-GÜTESIEGEL FÜR BOHRFIRMEN", font=mono, fill=(255, 255, 255))
     im.save(IMG / f"{name}.jpg", "JPEG", quality=86, optimize=True, progressive=True)
 
 
@@ -203,14 +200,14 @@ if __name__ == "__main__":
     m = fotos()
     lw = logo_svg()
     bildmarke()
-    og_bild()
+    og_bild("og", "Erdwärmesonden", "für Ihre Wärmepumpe.", "b_4.05.jpg", 0.4)
     for n, a, b, f, o in [
-        ("og-leistungen", "Alles bis zur", "Hauswand.", "b_4.05.jpg", 0.4),
-        ("og-ablauf", "Sechs Schritte", "bis zur Wärme.", "w_WhatsApp-Image-2022-02-16-at-06.21.58.jpg", 0.5),
-        ("og-foerderung", "CHF 6'800", "vom Kanton Zürich.", "b_3.05.jpg", 0.5),
-        ("og-referenzen", "Unsere", "Baustellen.", "w_WhatsApp-Image-2022-02-16-at-06.21.58-21.jpg", 0.5),
+        ("og-leistungen", "Leistungen", "bis in den Heizraum.", "b_3.05.jpg", 0.5),
+        ("og-ablauf", "In sechs Schritten", "zur Erdwärme.", "w_WhatsApp-Image-2022-02-16-at-06.21.58.jpg", 0.5),
+        ("og-foerderung", "CHF 6'800", "vom Kanton Zürich.", "b_5.05.jpg", 0.35),
+        ("og-referenzen", "Baustellen", "im Kanton Zürich.", "w_WhatsApp-Image-2022-02-16-at-06.21.58-21.jpg", 0.5),
         ("og-ueber-uns", "Bohrfirma aus", "dem Furttal.", "w_WhatsApp-Image-2022-02-16-at-06.22.09.jpg", 0.5),
-        ("og-kontakt", "Erstabklärung", "044 400 20 20", "b_6.05.jpg", 0.4),
+        ("og-kontakt", "Offerte anfragen", "044 400 20 20", "b_6.05.jpg", 0.4),
     ]:
         og_bild(n, a, b, f, o)
     import json
