@@ -182,8 +182,8 @@ def schluss(p, titel="Prüfen wir Ihr Grundstück.", text=None):
   <div class="schluss-text">
    <p class="lead">{text}</p>
    <div class="knopfreihe"><a class="knopf" href="{p}kontakt">Offerte anfragen</a><a class="knopf zwei" href="{TEL_LINK}">{TEL} anrufen</a></div>
+   <p class="klein" style="margin-top:16px">Telefon {BUEROZEIT}</p>
   </div>
-  <address class="schluss-adresse">Eco Green GmbH<br>Pumpwerkstrasse 40, 8105 Regensdorf<br><a href="mailto:{MAIL}">{MAIL}</a><br>{BUEROZEIT}</address>
  </div>
 </section>
 """
@@ -198,7 +198,7 @@ def fuss(p):
    <div>
     <a class="marke" href="{start}"><img src="{p}img/logo-hell.svg" width="160" height="60" alt="Eco Green, zur Startseite" loading="lazy"></a>
     <p>Erdsondenbohrungen für Wärmepumpen<br>im Kanton Zürich.</p>
-    <a class="fuss-siegel" href="{FWS_PDF}" rel="noopener">FWS-Gütesiegel, Liste Juli 2026</a>
+    <a class="fuss-siegel" href="{FWS_PDF}" rel="noopener">FWS-Gütesiegel seit 2021</a>
    </div>
    <div><h2>Seiten</h2><ul>{links}</ul></div>
    <div><h2>Kontakt</h2><ul><li><a href="{TEL_LINK}">{TEL}</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li><li><a href="{KARTE}" rel="noopener">Pumpwerkstrasse 40<br>8105 Regensdorf</a></li></ul></div>
@@ -249,7 +249,7 @@ FAQ = [
     ("Was passiert mit meinem Garten?",
      "<p>Das Raupengerät fährt auf Platten, damit Rasen und Zufahrt geschützt bleiben. Bohrschlamm fangen wir in Mulden auf. Nach der Arbeit bleibt nur ein kleiner Schacht mit dem Sondenkopf. Ist die Zufahrt zu eng, hebt ein Kran das Gerät über das Haus.</p>"),
     ("Was kostet eine Erdsonde?",
-     "<p>Das hängt von der Anzahl Sondenmeter ab, und die richten sich nach Ihrem Haus. Sie erhalten nach der Abklärung eine feste Offerte. Der Kanton Zürich zahlt beim Ersatz einer Öl-, Gas- oder Elektroheizung ab CHF 6'800 an die Anlage.</p>"),
+     "<p>Der Preis richtet sich nach den Sondenmetern, und die rechnen wir für Ihr Haus. Nach der Abklärung erhalten Sie eine feste Offerte mit allem, was zur Sonde gehört: Bohrung, Sonde, Verfüllung, Anschluss bis in den Heizraum. Beim Ersatz einer Öl-, Gas- oder Elektroheizung zahlt der Kanton Zürich ab CHF 6'800 daran.</p>"),
     ("Darf auf meinem Grundstück gebohrt werden?",
      "<p>Das zeigt der Wärmenutzungsatlas des Kantons Zürich für jede Parzelle. Wir prüfen das vor der Offerte. Liegt eine Sonde näher als 2,5 Meter an der Grundstücksgrenze, braucht es die Zustimmung Ihres Nachbarn.</p>"),
     ("Wie tief wird gebohrt?",
@@ -351,7 +351,7 @@ def seite_start():
     s["schema"] = [{"@type": "WebSite", "@id": BASIS + "#website", "url": BASIS, "name": "Eco Green", "inLanguage": "de-CH", "publisher": {"@id": ORG_ID}},
                    faq_schema(FAQ)]
     p = ""
-    leist = "".join(f'<article><span class="nr">{i + 1:02d}</span><div><h3>{t}</h3><p>{KURZ[t]}</p></div></article>'
+    leist = "".join(f'<article><div><h3>{t}</h3><p>{KURZ[t]}</p></div></article>'
                     for i, (t, _x, _b) in enumerate(LEISTUNGEN))
     schritte = "".join(f'<li class="schritt"><div class="kopfnr"><span>{i + 1:02d}</span><span class="mono">{dauer}</span></div><h3>{t}</h3><p>{x}</p></li>'
                        for i, (t, dauer, x) in enumerate(SCHRITTE))
@@ -370,10 +370,10 @@ def seite_start():
   </div>
   <div class="hero-bild">{foto(p, "garten", "Raupenbohrgerät von Eco Green bohrt im Garten eines Einfamilienhauses", "Bohrung im Garten eines Einfamilienhauses.", lazy=False, prio=True)}</div>
   <ul class="belege">
-    <li><a href="{FWS_PDF}" rel="noopener"><b>FWS-Gütesiegel</b>für Erdwärmesonden-Bohrfirmen</a></li>
+    <li><a href="{FWS_PDF}" rel="noopener"><b>FWS-Gütesiegel</b>Eine von 45 Bohrfirmen der Schweiz</a></li>
     <li><a href="#foerderung"><b>Förderbeitrag</b>ab CHF 6'800 vom Kanton</a></li>
     <li><b>Einsatzgebiet</b>{EINSATZ}</li>
-    <li><b>Feste Zeiten</b>Bohren nur Montag bis Freitag</li>
+    <li><b>Bewilligung</b>Unterlagen für Gemeinde und AWEL von uns</li>
   </ul>
  </div>
 </section>
@@ -382,12 +382,8 @@ def seite_start():
  <div class="wrap raster">
   <div class="kopfzeile">
    <div><span class="label">Heizungsersatz</span><h2 id="problem-h">Ihre Öl- oder Gasheizung muss ersetzt werden?</h2></div>
-   <p class="lead">Im Kanton Zürich darf eine fossile Heizung in einem bestehenden Haus seit 01.09.2022 grundsätzlich nur noch durch ein erneuerbares System ersetzt werden. Öl und Gas kosten jedes Jahr. Die Wärme aus dem Boden kostet nichts, Sie bezahlen nur den Strom für die Pumpe.</p>
-  </div>
-  <div class="zahlen">
-   <div><b>01.09.2022</b><p>Seit diesem Tag gilt im Kanton Zürich: erneuerbar ersetzen.</p></div>
-   <div><b>98 %</b><p>der ersetzten fossilen Heizungen wurden im ersten Jahr durch klimaneutrale ersetzt.</p></div>
-   <div><b>10 °C</b><p>hat der Boden ab etwa 15 Metern Tiefe, im Winter wie im Sommer.</p></div>
+   <div><p class="lead">Im Kanton Zürich darf eine fossile Heizung in einem bestehenden Haus seit 01.09.2022 grundsätzlich nur noch durch ein erneuerbares System ersetzt werden. Im ersten Jahr wurden über 98 Prozent der ersetzten fossilen Heizungen durch klimaneutrale ersetzt.</p>
+   <p class="lead">Öl und Gas kosten jedes Jahr. Die Wärme aus dem Boden kostet nichts, Sie bezahlen nur den Strom für die Pumpe.</p></div>
   </div>
   <p class="quelle" style="grid-column:1/-1">Quelle: <a href="{ZH_ENERGIE}" rel="noopener">Kanton Zürich, Bauvorschriften Gebäude und Energie</a>.</p>
  </div>
@@ -400,9 +396,9 @@ def seite_start():
    <span class="label">So funktioniert Erdwärme</span>
    <h2 id="prinzip-h">Der Boden heizt Ihr Haus.</h2>
    <ol class="teile" style="margin-top:32px">
-    <li><span class="nr">01</span><div><h3>Erdwärmesonde</h3><p>Ein Rohr in einem Bohrloch von 150 bis 250 Metern. Eine Flüssigkeit zirkuliert darin und nimmt die Wärme des Bodens auf.</p></div></li>
-    <li><span class="nr">02</span><div><h3>Wärmepumpe</h3><p>Sie hebt die Temperatur auf das Niveau Ihrer Heizung. Rund drei Viertel der Wärme stammen aus dem Boden, der Rest ist Strom.</p></div></li>
-    <li><span class="nr">03</span><div><h3>Heizung und Warmwasser</h3><p>Bodenheizung oder Radiatoren werden versorgt wie bisher. Im Sommer kann die Sonde das Haus leicht kühlen.</p></div></li>
+    <li><div><h3>Erdwärmesonde</h3><p>Ein Rohr in einem Bohrloch von 150 bis 250 Metern. Eine Flüssigkeit zirkuliert darin und nimmt die Wärme des Bodens auf.</p></div></li>
+    <li><div><h3>Wärmepumpe</h3><p>Sie hebt die Temperatur auf das Niveau Ihrer Heizung. Rund drei Viertel der Wärme stammen aus dem Boden, der Rest ist Strom.</p></div></li>
+    <li><div><h3>Heizung und Warmwasser</h3><p>Bodenheizung oder Radiatoren werden versorgt wie bisher. Im Sommer kann die Sonde das Haus leicht kühlen.</p></div></li>
    </ol>
    <a class="weiter" href="kontakt">Grundstück prüfen lassen</a>
   </div>
@@ -435,14 +431,14 @@ def seite_start():
  <div class="wrap raster">
   <div class="siegel">
    <span class="label">FWS-Gütesiegel</span>
-   <h2 id="vertrauen-h"><span class="gross">1 von 45</span>Bohrfirmen in der Schweiz mit Gütesiegel.</h2>
+   <h2 id="vertrauen-h"><span class="gross">Eine von 45</span>Bohrfirmen in der Schweiz mit Gütesiegel.</h2>
    <p style="margin-top:24px">Das AWEL empfiehlt Bauherrschaften eine Bohrfirma mit diesem Siegel. Für den Förderbeitrag verlangt es der Kanton.</p>
    <a class="weiter" href="{FWS_PDF}" rel="noopener">Gütesiegelliste ansehen</a>
   </div>
   <div class="vertrauen-daten">
    <dl class="daten">
     <div><dt>Sitz</dt><dd>Pumpwerkstrasse 40, Regensdorf, seit 2020</dd></div>
-    <div><dt>Gütesiegel</dt><dd>Auf der Liste der FWS seit Juni 2021, aktuell Stand Juli 2026</dd></div>
+    <div><dt>Gütesiegel</dt><dd>Seit Juni 2021 auf der Liste der FWS</dd></div>
     <div><dt>Geräte</dt><dd>Eigene Raupenbohrgeräte und eigenes Bohrteam</dd></div>
     <div><dt>Baustelle</dt><dd>Feste Arbeitszeiten, Nachbarn eine Woche vorher informiert, Rasen mit Platten geschützt</dd></div>
     <div><dt>Ansprechperson</dt><dd>Eine Person für die ganze Baustelle, mit direkter Nummer</dd></div>
@@ -457,8 +453,8 @@ def seite_start():
  <div class="wrap raster">
   <div class="foerder-text">
    <span class="label">Förderung</span>
-   <h2 id="foerder-h">CHF 6'800 vom Kanton Zürich.</h2>
-   <p class="lead" style="margin-top:24px">So viel zahlt der Kanton an eine Erdwärmepumpe bis 15 kW, die eine Öl-, Gas- oder Elektroheizung ersetzt. Darüber kommen CHF 420 pro kW dazu.</p>
+   <h2 id="foerder-h">Der Kanton Zürich zahlt mit.</h2>
+   <p class="lead" style="margin-top:24px">CHF 6'800 an eine Erdwärmepumpe bis 15 kW, die eine Öl-, Gas- oder Elektroheizung ersetzt. Darüber kommen CHF 420 pro kW dazu.</p>
    <p>Wichtig: Das Gesuch muss vor der Bohrung eingereicht sein. Und es verlangt eine Bohrfirma mit gültigem Gütesiegel. Beides klären wir mit Ihnen vor dem ersten Bohrtag.</p>
    <a class="weiter" href="foerderung">Bedingungen und Unterlagen</a>
    <p class="quelle">Quelle: Kanton Zürich, <a href="{ZH_FOERDER_PDF}" rel="noopener">Förderprogramm Heizung ersetzen</a>. Das Programm läuft <a href="{ZH_2026}" rel="noopener">2026 unverändert</a> weiter.</p>
@@ -469,7 +465,7 @@ def seite_start():
 
 <section class="sektion hell" aria-labelledby="faq-h">
  <div class="wrap raster">
-  <div class="faq-kopf"><span class="label">Fragen</span><h2 id="faq-h">Was Hausbesitzer vor der Bohrung wissen wollen.</h2><p style="margin-top:24px">Ihre Frage fehlt? <a href="{TEL_LINK}">{TEL}</a></p></div>
+  <div class="faq-kopf"><span class="label">Fragen</span><h2 id="faq-h">Fragen vor der Bohrung.</h2><p style="margin-top:24px">Ihre Frage fehlt? <a href="{TEL_LINK}">{TEL}</a></p></div>
   <div class="faq">{faq_html(FAQ)}</div>
  </div>
 </section>
@@ -717,7 +713,7 @@ def seite_ueber():
     <div><dt>Sitz</dt><dd>Pumpwerkstrasse 40, 8105 Regensdorf, seit 2020</dd></div>
     <div><dt>Handelsregister</dt><dd>Kanton Zürich, CHE-141.654.180</dd></div>
     <div><dt>Tätigkeit</dt><dd>Planung und Ausführung von Erdsondenbohrungen</dd></div>
-    <div><dt>Gütesiegel</dt><dd>FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen, auf der Liste seit Juni 2021, aktuell Stand Juli 2026</dd></div>
+    <div><dt>Gütesiegel</dt><dd>FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen, seit Juni 2021 auf der Liste</dd></div>
     <div><dt>Geräte</dt><dd>Eigene Raupenbohrgeräte, Transport bei Bedarf mit Kran</dd></div>
     <div><dt>Einsatzgebiet</dt><dd>{EINSATZ}</dd></div>
    </dl>
