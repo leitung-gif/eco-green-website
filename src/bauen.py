@@ -620,13 +620,13 @@ PROJEKTE = [
 ]
 
 def seite_referenzen():
-    s = {"slug": "referenzen", "p": "", "ogbild": "og-referenzen", "preload": preload("garten", "(max-width: 640px) 100vw, (max-width: 1020px) 50vw, 33vw"), "spur": [("referenzen", "Baustellen")],
+    s = {"slug": "referenzen", "p": "", "ogbild": "og-referenzen", "preload": preload("garten", "(max-width: 640px) 50vw, (max-width: 1020px) 33vw, 25vw"), "spur": [("referenzen", "Baustellen")],
          "title": "Erdsondenbohrung Referenzen | Eco Green Baustellen",
          "desc": "Baustellen von Eco Green: Erdsondenbohrungen für Einfamilienhäuser, Mehrfamilienhäuser und Neubauten im Kanton Zürich. Mit Kran, wenn die Zufahrt zu eng ist."}
     p = s["p"]
     zeilen = "".join(f"<tr><td data-label=\"Objekt\">{o}</td><td data-label=\"Region\">{ort}</td><td data-label=\"Ersetzt\">{alt}</td><td data-label=\"Sonden\" class=\"zahl\">{sonden}</td><td data-label=\"Besonderheit\">{notiz}</td></tr>"
                      for o, ort, alt, sonden, notiz in PROJEKTE)
-    gal = "".join(foto(p, k, a, c, sizes="(max-width: 640px) 100vw, 25vw", cls="auf", lazy=i > 3, prio=i == 0) for i, (k, a, c) in enumerate([
+    gal = "".join(foto(p, k, a, c, sizes="(max-width: 640px) 50vw, (max-width: 1020px) 33vw, 25vw", cls="auf", lazy=i > 3, prio=i == 0) for i, (k, a, c) in enumerate([
         ("garten", "Türkises Raupenbohrgerät im Garten eines Einfamilienhauses", "Garten eines Einfamilienhauses."),
         ("dorf", "Bohrgerät zwischen Bauernhaus und Wohnhaus", "Zwischen Bauernhaus und Wohnhaus."),
         ("feld", "Bohrgerät und Bagger am Siedlungsrand im Winter", "Siedlungsrand im Winter."),
