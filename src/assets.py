@@ -1,7 +1,9 @@
 """Bilder, Logo als SVG, Favicons und OG-Bild fuer die Eco-Green-Website.
 
-Quelle aller Fotos und Logos: recherche/roh/bilder (eco-green.ch, abgerufen 21.10.2026).
-Aufruf: python assets.py   (schreibt nach ../docs/img und ../docs)
+Quelle der Logos und der Fotos von 2022: recherche/roh/bilder (eco-green.ch, abgerufen 21.10.2026).
+Fotos vom 12.11.2026: fotos-mahissa-2026-11-12 (von Mahissa Ganz-Yasri per WhatsApp, ohne Filter).
+Aufruf: python assets.py               (alles, schreibt nach ../docs/img und ../docs)
+        python assets.py --fotos-neu   (nur die Fotos vom 12.11.2026, der Rest bleibt unberuehrt)
 """
 from pathlib import Path
 import io
@@ -36,6 +38,25 @@ FOTOS = {
     "herbst":     ("w_WhatsApp-Image-2022-02-16-at-06.21.59.jpg", (0, 0, 1, 1)),
     "dorf":       ("WhatsApp-Image-2022-02-16-at-06.21.52-480x765.jpg", (0, 0, 1, 1)),
 }
+# Fotos vom 12.11.2026. Ausschnitte so gewaehlt, dass keine Gesichter, Kennzeichen,
+# fremden Firmenschilder oder Aufkleber anderer Bohrfirmen im Bild sind.
+NEU = HIER.parents[1] / "fotos-mahissa-2026-11-12"
+_W = "WhatsApp Image 2026-11-12 at "
+FOTOS_NEU = {
+    "efh":             (_W + "13.24.21.jpeg", (0, 0, 1, 1)),             # quer
+    "maylin":          (_W + "13.24.19.jpeg", (0, 0, 1, 1)),             # hoch
+    "aggregat":        (_W + "13.24.20 (1).jpeg", (0, 0, 1, 1)),         # hoch
+    "team":            (_W + "13.24.20 (6).jpeg", (0, 0, 1, 1)),         # hoch, Galerie
+    "team-quer":       (_W + "13.24.20 (6).jpeg", (0, 0.4375, 1, 1)),    # 4:3, Seitenkopf
+    "team-nah":        (_W + "13.24.20 (8).jpeg", (0, 0.40, 1, 0.9625)), # 4:3, Bildreihe
+    "hang":            (_W + "13.24.21 (1).jpeg", (0, 0, 1, 1)),         # hoch
+    "kompressor":      (_W + "13.24.33.jpeg", (0, 0, 0.955, 1)),         # quer, rechter Rand weg (fremder Aufkleber)
+    "verteiler-14":    (_W + "13.21.49.jpeg", (0, 0, 1, 1)),             # quer
+    "verteiler-grube": (_W + "13.24.20 (10).jpeg", (0, 0, 1, 1)),        # hoch
+    "sondenkopf":      (_W + "13.24.20 (5).jpeg", (0, 0.36, 1, 0.9225)), # 4:3, Leistungen
+    "nachher":         (_W + "13.24.20 (2).jpeg", (0, 0.39, 1, 1)),      # ohne Firmenschild und Autos
+}
+KOERNIG = {"verteiler-grube"}   # viel Erdreich im Bild, ohne Weichzeichner ueber 200 KB
 BREITEN = (480, 800, 1200)
 GROSS = {"kran", "garten"}
 
@@ -45,13 +66,18 @@ def grau(im: Image.Image) -> Image.Image:
     return ImageOps.autocontrast(im, cutoff=(0.3, 0.3), preserve_tone=True)
 
 
-def fotos():
+def fotos(liste=None, quelle=None, weich=True):
+    """weich: leichter Weichzeichner gegen die Artefakte der kleinen Bilder von 2022."""
+    liste = FOTOS if liste is None else liste
+    quelle = ROH if quelle is None else quelle
     masse = {}
-    for key, (datei, (l, o, r, u)) in FOTOS.items():
-        im = Image.open(ROH / datei).convert("RGB")
+    for key, (datei, (l, o, r, u)) in liste.items():
+        im = ImageOps.exif_transpose(Image.open(quelle / datei)).convert("RGB")
         w, h = im.size
         im = im.crop((int(l * w), int(o * h), int(r * w), int(u * h)))
-        im = grau(im).filter(ImageFilter.GaussianBlur(0.6))
+        im = grau(im)
+        if weich or key in KOERNIG:
+            im = im.filter(ImageFilter.GaussianBlur(0.6))
         w, h = im.size
         breiten = BREITEN if key in GROSS else BREITEN[:2]
         for b in breiten:
@@ -60,7 +86,7 @@ def fotos():
             bb = min(b, w)
             hh = round(h * bb / w)
             k = im.resize((bb, hh), Image.LANCZOS)
-            q = {480: 70, 800: 60, 1200: 52}[b]
+            q = {480: 70, 800: 60, 1200: 52}[b] if weich else {480: 62, 800: 52, 1200: 48}[b]
             k = k.convert("L") if False else k
             k.save(IMG / f"{key}-{b}.webp", "WEBP", quality=q, method=6)
         masse[key] = (w, h, [b for b in breiten if b <= w or b == breiten[0]])
@@ -191,7 +217,16 @@ def og_bild(name="og", z1="Wir bohren", z2="nach Wärme.", fotokey="b_5.05.jpg",
 
 
 if __name__ == "__main__":
+    import json, sys
+    if "--fotos-neu" in sys.argv:
+        daten = json.loads((HIER / "bilder.json").read_text(encoding="utf-8"))
+        neu = fotos(FOTOS_NEU, NEU, weich=False)
+        daten["fotos"].update({k: list(v) for k, v in neu.items()})
+        (HIER / "bilder.json").write_text(json.dumps(daten, indent=1), encoding="utf-8")
+        print(json.dumps(neu))
+        sys.exit()
     m = fotos()
+    m.update(fotos(FOTOS_NEU, NEU, weich=False))
     lw = logo_svg()
     bildmarke()
     og_bild("og", "Erdwärmesonden", "für Ihre Wärmepumpe.", "b_4.05.jpg", 0.4)
@@ -204,6 +239,5 @@ if __name__ == "__main__":
         ("og-kontakt", "Offerte anfragen", "044 400 20 20", "b_6.05.jpg", 0.4),
     ]:
         og_bild(n, a, b, f, o)
-    import json
     (HIER / "bilder.json").write_text(json.dumps({"fotos": m, "logo": lw}, indent=1), encoding="utf-8")
     print(json.dumps(m)); print("logo", lw)

@@ -189,6 +189,9 @@ body.gesperrt{overflow:hidden}
 .daten dd{margin:0}
 .dunkel .daten,.dunkel .daten div{border-color:rgba(255,255,255,.18)}
 .dunkel .daten dt{color:var(--g200)}
+/* Namen der Geschaeftsleitung: wie .daten, aber eine Spalte und eine Stufe groesser */
+.namen{margin:0;padding:0;list-style:none;border-top:1px solid var(--linie)}
+.namen li{padding:var(--a4) 0;border-bottom:1px solid var(--linie);font-size:var(--t-2);font-weight:600;letter-spacing:-.01em;line-height:1.25}
 .bildreihe{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gutter);margin-top:var(--a8)}
 .bildreihe .foto img{aspect-ratio:4/3}
 .bildreihe{align-items:start}

@@ -28,7 +28,7 @@ if "--live" in sys.argv:          # Probe fuer den Livegang: python bauen.py --l
     BASIS, VORSCHAU = "https://eco-green.ch/", False
     OUT = Path(sys.argv[sys.argv.index("--live") + 1]).resolve()
 PFAD = "/" + BASIS.split("/", 3)[3]
-STAND = "2026-10-21"
+STAND = "2026-11-12"
 
 TEL = "044 400 20 20"
 TEL_LINK = "tel:+41444002020"
@@ -58,14 +58,15 @@ def esc(s): return html.escape(s, quote=True)
 
 # ---------------------------------------------------------------- Bausteine
 
-def bild(p, key, alt, sizes="(max-width: 900px) 100vw, 40vw", lazy=True, prio=False, breit=None):
+def bild(p, key, alt, sizes="(max-width: 900px) 100vw, 40vw", lazy=True, prio=False, breit=None, pos=None):
     w, h, br = BILDER["fotos"][key]
     br = [b for b in br if breit is None or b <= breit] or br[:1]
     srcset = ", ".join(f"{p}img/{key}-{b}.webp {min(b, w)}w" for b in br)
     gross = br[-1] if len(br) == 1 else br[1]
     attr = 'fetchpriority="high"' if prio else ('loading="lazy" decoding="async"' if lazy else "")
+    stil = f' style="object-position:{pos}"' if pos else ""   # Ausschnitt, wenn das Raster das Bild beschneidet
     return (f'<img src="{p}img/{key}-{gross}.webp" srcset="{srcset}" sizes="{sizes}" '
-            f'width="{w}" height="{h}" alt="{esc(alt)}" {attr}>')
+            f'width="{w}" height="{h}" alt="{esc(alt)}" {attr}{stil}>')
 
 def preload(key, sizes):
     w, h, br = BILDER["fotos"][key]
@@ -142,7 +143,7 @@ def head(s):
 <link rel="apple-touch-icon" href="{p}apple-touch-icon.png">
 <link rel="manifest" href="{p}site.webmanifest">
 <link rel="preload" href="{p}fonts/schibsted-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}<link rel="stylesheet" href="{p}site.css?v=4">
+{pre}<link rel="stylesheet" href="{p}site.css?v=5">
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
@@ -278,8 +279,8 @@ SCHRITTE = [
 LEISTUNGEN = [
     ("Sondenauslegung", "Wir berechnen aus Wärmebedarf und Untergrund, wie viele Sonden Ihr Haus braucht und wie tief sie gehen. Zu kurz kühlt der Boden über die Jahre aus. Zu lang zahlen Sie Meter, die Sie nicht brauchen.", None),
     ("Bewilligungs&shy;unterlagen", "Für das gewässerschutzrechtliche Gesuch stellen wir zusammen, was die Gemeinde verlangt: Situationsplan mit Sondenstandort, Sondenlänge, Angaben zur Wärmepumpe. Sie unterschreiben und reichen ein.", None),
-    ("Erdsonden&shy;bohrung", "Mit eigenen Raupenbohrgeräten und eigenem Bohrteam, an dem Tag, der in der Offerte steht. Ist die Zufahrt zu eng, hebt ein Kran das Gerät über das Haus.", "garten"),
-    ("Sondeneinbau und Verfüllung", "Wir bauen die Sonde ein und verfüllen das Bohrloch von unten nach oben dicht. So fliesst kein Wasser zwischen den Bodenschichten, und die Sonde bleibt Jahrzehnte im Boden.", None),
+    ("Erdsonden&shy;bohrung", "Mit eigenen Raupenbohrgeräten und eigenem Bohrteam, an dem Tag, der in der Offerte steht. Ist die Zufahrt zu eng, hebt ein Kran das Gerät über das Haus.", "efh"),
+    ("Sondeneinbau und Verfüllung", "Wir bauen die Sonde ein und verfüllen das Bohrloch von unten nach oben dicht. So fliesst kein Wasser zwischen den Bodenschichten, und die Sonde bleibt Jahrzehnte im Boden.", "sondenkopf"),
     ("Druckprobe und Anbindung", "Jede Sonde wird mit Druck geprüft und im Protokoll festgehalten. Danach verlegen wir die Verbindungsleitungen zum Haus und setzen den Verteiler im Heizraum.", "verteiler"),
     ("Befüllung und Übergabe", "Wir füllen Sonde und Leitungen mit Wärmeträgerflüssigkeit und übergeben die Anlage an Ihren Heizungsinstallateur. Bohrprotokoll und Rechnung für das Fördergesuch erhalten Sie mit.", None),
 ]
@@ -357,8 +358,8 @@ def seite_start():
                        for i, (t, dauer, x) in enumerate(SCHRITTE))
     bilder = "".join(foto(p, k, a, c, sizes="(max-width: 900px) 100vw, 33vw") for k, a, c in [
         ("kran", "Ein Kran hebt ein Raupenbohrgerät über ein Wohnhaus", "Zufahrt zu eng: das Gerät kommt per Kran."),
-        ("bohrmeister", "Bohrmeister im Eco-Green-Shirt am Bohrgerät", "Eigenes Bohrteam auf jeder Baustelle."),
-        ("verteiler", "Zwei Sondenrohre mit Manometern während der Druckprobe", "Druckprobe an zwei Sonden."),
+        ("team-nah", "Bohrmeister im Eco-Green-Shirt am Bohrgerät", "Eigenes Bohrteam auf jeder Baustelle."),
+        ("verteiler-14", "Sondenverteiler mit 14 nummerierten Anschlüssen in einem Technikraum", "Verteiler für 14 Sonden."),
     ])
     body = f"""<section class="hero" aria-labelledby="h1">
  <div class="wrap raster">
@@ -484,7 +485,9 @@ def seite_leistungen():
     for i, (t, x, b) in enumerate(LEISTUNGEN):
         rechts = ""
         if b:
-            alt = {"garten": "Raupenbohrgerät bohrt im Garten eines Einfamilienhauses", "verteiler": "Sondenverteiler mit zwei Manometern"}[b]
+            alt = {"efh": "Bohrgerät von Eco Green vor einem Einfamilienhaus, im Vordergrund eine Rolle Sondenrohr",
+                   "sondenkopf": "Eingebaute Erdwärmesonde im Bohrloch, das Rohrende mit gelber Schutzkappe",
+                   "verteiler": "Sondenverteiler mit zwei Manometern"}[b]
             rechts = f'<div class="bild versatz">{foto(p, b, alt, sizes="(max-width: 900px) 100vw, 33vw")}</div>'
         reihen += f'<article class="leistung"><span class="nr">{i + 1:02d}</span><div class="inhalt"><h2>{t}</h2><p>{x}</p></div>{rechts}</article>'
     body = seitenkopf(s, "Alles, was zur Erdsonde gehört.", "Eco Green bohrt Erdwärmesonden und schliesst sie bis in den Heizraum an. Sie haben eine Ansprechperson vom ersten Anruf bis zum Bohrprotokoll.") + f"""
@@ -513,7 +516,7 @@ def seite_leistungen():
 
 
 def seite_ablauf():
-    s = {"slug": "ablauf", "p": "", "ogbild": "og-ablauf", "preload": preload("feld2", "(max-width: 900px) 100vw, 33vw"), "spur": [("ablauf", "Ablauf")],
+    s = {"slug": "ablauf", "p": "", "ogbild": "og-ablauf", "preload": preload("kompressor", "(max-width: 900px) 100vw, 33vw"), "spur": [("ablauf", "Ablauf")],
          "title": "Erdsonde Bewilligung Zürich: Ablauf | Eco Green",
          "desc": "Von der Abklärung im Wärmenutzungsatlas bis zur Übergabe: so läuft eine Erdsondenbohrung im Kanton Zürich ab. Mit Bewilligung, Förderung und Baustellenregeln."}
     p = s["p"]
@@ -538,7 +541,7 @@ def seite_ablauf():
         f'<div class="phase-sie"><h3>Was Sie tun</h3><p>{sie[i]}</p></div><div class="phase-wir"><h3>Was wir tun</h3><p>{wir[i]}</p></div></article>'
         for i, (t, dauer, _x) in enumerate(SCHRITTE))
     body = seitenkopf(s, "Ablauf einer Erdsondenbohrung.", "Von der ersten Anfrage bis zur Übergabe vergehen meist zwei bis drei Monate. Die meiste Zeit braucht die Bewilligung. Die Bohrung selbst dauert wenige Tage.",
-                      foto(p, "feld2", "Bohrgerät mit Bagger auf einer Wiese am Dorfrand", "Bohrung am Dorfrand im Winter.", lazy=False, prio=True, sizes="(max-width: 900px) 100vw, 33vw")) + f"""
+                      foto(p, "kompressor", "Raupenbohrgerät und Kompressor von Eco Green auf einem Bohrplatz", "Bohrplatz mit Bohrgerät und Kompressor.", lazy=False, prio=True, sizes="(max-width: 900px) 100vw, 33vw", pos="72% 50%")) + f"""
 <section class="sektion"><div class="wrap raster">{phasen}</div></section>
 <section class="sektion hell" aria-labelledby="bew-h">
  <div class="wrap raster">
@@ -661,21 +664,26 @@ PROJEKTE = [
 ]
 
 def seite_referenzen():
-    s = {"slug": "referenzen", "p": "", "ogbild": "og-referenzen", "preload": preload("garten", "(max-width: 900px) 50vw, 25vw"), "spur": [("referenzen", "Baustellen")],
+    s = {"slug": "referenzen", "p": "", "ogbild": "og-referenzen", "preload": preload("maylin", "(max-width: 900px) 50vw, 25vw"), "spur": [("referenzen", "Baustellen")],
          "title": "Erdsondenbohrung Referenzen | Eco Green Baustellen",
          "desc": "Baustellen von Eco Green: Erdsondenbohrungen für Einfamilienhäuser, Mehrfamilienhäuser und Neubauten im Kanton Zürich. Mit Kran, wenn die Zufahrt zu eng ist."}
     p = s["p"]
     zeilen = "".join(f'<tr><td data-label="Objekt">{o}</td><td data-label="Region">{ort}</td><td data-label="Ersetzt">{alt}</td><td data-label="Sonden" class="zahl">{sonden}</td><td data-label="Besonderheit">{notiz}</td></tr>'
                      for o, ort, alt, sonden, notiz in PROJEKTE)
-    gal = "".join(foto(p, k, a, c, sizes="(max-width: 900px) 50vw, 25vw", lazy=i > 3, prio=i == 0) for i, (k, a, c) in enumerate([
-        ("garten", "Türkises Raupenbohrgerät im Garten eines Einfamilienhauses", "Garten eines Einfamilienhauses."),
-        ("dorf", "Bohrgerät zwischen Bauernhaus und Wohnhaus", "Zwischen Bauernhaus und Wohnhaus."),
-        ("feld", "Bohrgerät und Bagger am Siedlungsrand im Winter", "Siedlungsrand im Winter."),
-        ("rot-grube", "Rotes Raupenbohrgerät neben einer Baugrube", "Neubau, vor dem Aushub."),
-        ("herbst", "Bohrgerät neben einer Baugrube im Herbst", "Baugrube im Herbst."),
-        ("mast", "Bohrmast von unten", "Der Bohrmast."),
-        ("raupe", "Fuss des Bohrmasts im Bohrschlamm", "Bohrschlamm am Mastfuss."),
-        ("rot-nah", "Hydraulik am roten Bohrgerät", "Hydraulik am roten Gerät."),
+    # Fotos vom 12.11.2026 (Mahissa Ganz-Yasri) zuerst, dazu die drei staerksten von 2022. pos = Ausschnitt im Hochformat.
+    gal = "".join(foto(p, k, a, c, sizes="(max-width: 900px) 50vw, 25vw", lazy=i > 3, prio=i == 0, pos=pos) for i, (k, a, c, pos) in enumerate([
+        ("maylin", "Rotes Raupenbohrgerät von Eco Green auf einem Bauplatz zwischen Wohnhäusern", "Bohrgerät Maylin auf dem Bauplatz.", None),
+        ("garten", "Türkises Raupenbohrgerät im Garten eines Einfamilienhauses", "Garten eines Einfamilienhauses.", None),
+        ("team", "Bohrmeister im grünen Eco-Green-Shirt vor dem Bohrgerät", "Bohrmeister am Gestänge.", None),
+        ("hang", "Gelbes Raupenbohrgerät an einem Hang am Waldrand", "Bohrung am Hang.", None),
+        ("efh", "Bohrgerät vor einem Einfamilienhaus, daneben eine Rolle Sondenrohr", "Vor dem Einbau: die Sonde auf der Rolle.", "42% 50%"),
+        ("dorf", "Bohrgerät zwischen Bauernhaus und Wohnhaus", "Zwischen Bauernhaus und Wohnhaus.", None),
+        ("aggregat", "Rotes Bohrgerät und Stromaggregat mit Eco-Green-Logo", "Bohrgerät mit eigenem Stromaggregat.", None),
+        ("feld", "Bohrgerät und Bagger am Siedlungsrand im Winter", "Siedlungsrand im Winter.", None),
+        ("verteiler-grube", "Sondenverteiler in einer Grube, die Leitungen führen ins Erdreich", "Verteiler in der Grube.", None),
+        ("nachher", "Asphaltierter Vorplatz nach der Bohrung, aus dem Boden ragt nur das Sondenrohr mit Schutzkappe", "Nach der Bohrung bleibt das Sondenrohr.", "62% 50%"),
+        ("kompressor", "Raupenbohrgerät und Kompressor von Eco Green auf einem Bohrplatz", "Bohrgerät und Kompressor.", "72% 50%"),
+        ("verteiler-14", "Sondenverteiler mit 14 nummerierten Anschlüssen in einem Technikraum", "Verteiler für 14 Sonden.", None),
     ]))
     body = seitenkopf(s, "Baustellen.", "Alle Bilder auf dieser Website stammen von Baustellen von Eco Green. So sehen Erdsondenbohrungen im Kanton Zürich aus.") + f"""
 <section class="sektion" aria-labelledby="gal-h">
@@ -698,12 +706,12 @@ def seite_referenzen():
 
 
 def seite_ueber():
-    s = {"slug": "ueber-uns", "p": "", "ogbild": "og-ueber-uns", "preload": preload("bohrmeister", "(max-width: 900px) 100vw, 33vw"), "spur": [("ueber-uns", "Über uns")],
+    s = {"slug": "ueber-uns", "p": "", "ogbild": "og-ueber-uns", "preload": preload("team-quer", "(max-width: 900px) 100vw, 33vw"), "spur": [("ueber-uns", "Über uns")],
          "title": "Bohrfirma mit FWS-Gütesiegel in Regensdorf | Eco Green",
          "desc": "Eco Green GmbH ist eine Bohrfirma für Erdwärmesonden an der Pumpwerkstrasse 40 in Regensdorf. Mit FWS-Gütesiegel seit 2021 und eigenen Raupenbohrgeräten."}
     p = s["p"]
     body = seitenkopf(s, "Bohrfirma aus dem Furttal.", "Eco Green GmbH bohrt Erdwärmesonden für Einfamilienhäuser, Mehrfamilienhäuser und Neubauten. Von Regensdorf aus fahren wir mit eigenen Geräten zu Baustellen im ganzen Kanton.",
-                      foto(p, "bohrmeister", "Bohrmeister im grünen Eco-Green-Shirt am Bohrgerät", "Bohrmeister von Eco Green.", lazy=False, prio=True, sizes="(max-width: 900px) 100vw, 33vw")) + f"""
+                      foto(p, "team-quer", "Bohrmeister im grünen Eco-Green-Shirt am Bohrgerät", "Bohrmeister von Eco Green.", lazy=False, prio=True, sizes="(max-width: 900px) 100vw, 33vw")) + f"""
 <section class="sektion" aria-labelledby="daten-h">
  <div class="wrap raster">
   <div class="links"><h2 id="daten-h">Die Firma in Fakten.</h2></div>
@@ -732,13 +740,12 @@ def seite_ueber():
 </section>
 <section class="sektion" aria-labelledby="leute-h">
  <div class="wrap raster">
-  <div class="links"><h2 id="leute-h">Geschäftsführung.</h2></div>
+  <div class="links"><h2 id="leute-h">Geschäftsleitung.</h2></div>
   <div class="rechts">
-   <dl class="daten">
-    <div><dt>Etiènne Spruijt</dt><dd>Inhaber und Vorsitzender der Geschäftsführung. Bohrungen und Geräte.</dd></div>
-    <div><dt>Mahissa Ganz-Yasri</dt><dd>Geschäftsführerin. Offerten und Termine.</dd></div>
-    <div><dt>Bohrteam</dt><dd>Eigenes Bohrpersonal auf jeder Baustelle.</dd></div>
-   </dl>
+   <ul class="namen">
+    <li>Mahissa Ganz-Yasri</li>
+    <li>Etiènne Spruijt</li>
+   </ul>
   </div>
  </div>
 </section>
