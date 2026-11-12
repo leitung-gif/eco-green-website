@@ -75,10 +75,10 @@ p{margin:0 0 1em;max-width:65ch}
 .kopf-in{display:flex;align-items:center;gap:var(--a5);height:var(--kopf)}
 .marke{display:block;flex:0 0 auto;width:150px}
 .nav{display:flex;gap:var(--a1);margin-left:auto}
-.nav a{display:block;padding:var(--a2) var(--a3);font-size:1rem;font-weight:500;text-decoration:none;border-bottom:2px solid transparent}
+.nav a{display:block;padding:var(--a2) var(--a3);font-size:1rem;font-weight:500;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
 .nav a:hover{color:var(--marke)}
 .nav a[aria-current="page"]{color:var(--marke);border-bottom-color:var(--marke)}
-.kopf .knopf{min-height:44px;padding:8px 16px}
+.kopf .knopf{min-height:44px;padding:8px 16px;white-space:nowrap;flex:0 0 auto}
 .menuknopf{display:none;margin-left:auto;min-height:44px;padding:8px 16px;background:var(--weiss);border:2px solid var(--g800);border-radius:var(--radius);color:var(--g800);font-weight:600;cursor:pointer}
 .menue{position:fixed;inset:0;z-index:80;background:var(--g900);color:var(--weiss);display:flex;flex-direction:column;padding:var(--a4) var(--gutter) var(--a6);transform:translateY(-100%);visibility:hidden;transition:transform .3s var(--ease),visibility 0s linear .3s;overflow-y:auto}
 .menue.offen{transform:none;visibility:visible;transition:transform .3s var(--ease)}
@@ -325,9 +325,54 @@ body.gesperrt{overflow:hidden}
 .recht h2:first-child{margin-top:0}
 .recht address{font-style:normal}
 
+/* Ratgeber: Uebersicht, Startseitenabschnitt, verwandte Beitraege */
+.ratgeber-liste{grid-column:1 / -1;list-style:none;margin:0;padding:0;border-top:1px solid var(--linie)}
+.ratgeber-liste li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);padding:var(--a6) 0;border-bottom:1px solid var(--linie)}
+.ratgeber-liste .stand{grid-column:1 / span 3;font-size:var(--t-s);color:var(--text-2);padding-top:8px}
+.ratgeber-liste .eintrag{grid-column:4 / span 8}
+.ratgeber-liste h2{font-size:var(--t-3);margin-bottom:var(--a3);max-width:20em}
+.ratgeber-liste h2 a,.ratgeber-kurz h3 a{text-decoration:none}
+.ratgeber-liste h2 a:hover,.ratgeber-kurz h3 a:hover{color:var(--marke);text-decoration:underline;text-decoration-thickness:2px}
+.ratgeber-liste p{margin:0;color:var(--text-2);max-width:34em}
+.ratgeber-kurz{grid-column:1 / -1;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gutter);row-gap:var(--a6)}
+.ratgeber-kurz li{border-top:2px solid var(--g800);padding-top:var(--a4)}
+.ratgeber-kurz .mono{display:block;font-size:var(--t-s);color:var(--text-2);margin-bottom:var(--a3)}
+.ratgeber-kurz h3{margin-bottom:var(--a2)}
+.ratgeber-kurz p{margin:0;font-size:1rem;color:var(--text-2)}
+
+/* Ratgeber: Artikel. Lesespalte hoechstens 68 Zeichen */
+.artikel-kopf .lead{max-width:32em}
+.artikel-meta{margin:var(--a5) 0 0;font-size:var(--t-s);color:var(--text-2)}
+.artikel-meta a{color:var(--marke)}
+.artikel-text{grid-column:1 / span 8;max-width:30em}
+.artikel-text > :first-child{margin-top:0}
+.artikel-text h2{font-size:var(--t-3);margin:var(--a7) 0 var(--a4)}
+.artikel-text h3{margin:var(--a6) 0 var(--a3)}
+.artikel-text p{max-width:none}
+.artikel-text ul,.artikel-text ol{margin:0 0 1em;padding-left:1.25em}
+.artikel-text li{margin-bottom:var(--a2);padding-left:var(--a1)}
+.artikel-text li::marker{color:var(--marke)}
+.artikel-text a{color:var(--marke)}
+.artikel-inhalt{grid-column:10 / -1;align-self:start;position:sticky;top:calc(var(--kopf) + var(--a6))}
+.artikel-inhalt ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--linie)}
+.artikel-inhalt li{border-bottom:1px solid var(--linie)}
+.artikel-inhalt a{display:block;padding:var(--a3) 0;font-size:var(--t-s);line-height:1.35;text-decoration:none}
+.artikel-inhalt a:hover{color:var(--marke);text-decoration:underline}
+/* Tabellen im Artikel scrollen im eigenen Rahmen, nie die Seite */
+.text-tabelle-rahmen{max-width:100%;overflow-x:auto;margin:var(--a5) 0 var(--a6);border-top:2px solid var(--g800)}
+.text-tabelle{width:100%;border-collapse:collapse;font-size:1rem;line-height:1.45}
+.text-tabelle th{text-align:left;vertical-align:bottom;font-weight:600;font-size:var(--t-s);color:var(--marke);padding:var(--a3) var(--a4) var(--a3) 0;border-bottom:1px solid var(--g800)}
+.text-tabelle td{vertical-align:top;padding:var(--a3) var(--a4) var(--a3) 0;border-bottom:1px solid var(--linie)}
+.text-tabelle th,.text-tabelle td{min-width:8em}
+.text-tabelle tr > :last-child{padding-right:0}
+.quellen-liste a{overflow-wrap:anywhere}
+
 /* Breiten */
-@media (max-width:1100px){
-  .nav a{padding:var(--a2)}
+/* Kopf bleibt von 1001 bis 1440 px einzeilig: sieben Punkte plus Knopf, enger ab 1180 px */
+@media (max-width:1180px){
+  .kopf-in{gap:var(--a4)}
+  .nav{gap:0}
+  .nav a{padding:var(--a2) 6px}
   .kopf .knopf .lang{display:none}
 }
 @media (max-width:1000px){
@@ -375,6 +420,10 @@ body.gesperrt{overflow:hidden}
   .fuss-grid > div:first-child{grid-column:1 / -1}
   .leiste{display:grid;grid-template-columns:1fr 1fr;gap:var(--a2);position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--weiss);border-top:1px solid var(--linie);padding:var(--a2) var(--a3) calc(var(--a2) + env(safe-area-inset-bottom))}
   .leiste .knopf{width:100%;padding:12px}
+  .ratgeber-liste li{grid-template-columns:minmax(0,1fr);row-gap:var(--a2)}
+  .ratgeber-liste .stand,.ratgeber-liste .eintrag{grid-column:1 / -1}
+  .ratgeber-kurz{grid-template-columns:minmax(0,1fr)}
+  .artikel-inhalt{position:static;order:-1;margin-bottom:var(--a7)}
   body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 }
 @media (max-width:640px){

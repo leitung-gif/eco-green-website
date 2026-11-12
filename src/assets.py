@@ -4,6 +4,9 @@ Quelle der Logos und der Fotos von 2022: recherche/roh/bilder (eco-green.ch, abg
 Fotos vom 12.11.2026: fotos-mahissa-2026-11-12 (von Mahissa Ganz-Yasri per WhatsApp, ohne Filter).
 Aufruf: python assets.py               (alles, schreibt nach ../docs/img und ../docs)
         python assets.py --fotos-neu   (nur die Fotos vom 12.11.2026, der Rest bleibt unberuehrt)
+OG-Bilder der Ratgeber-Artikel: og_artikel(), aufgerufen von bauen.py nur fuer fehlende oder geaenderte
+Artikel (Stempel in og-ratgeber.json). Seit 12.11.2026 nie mehr ganz laufen lassen: das kodiert alle
+bestehenden Bilder neu.
 """
 from pathlib import Path
 import io
@@ -216,6 +219,67 @@ def og_bild(name="og", z1="Wir bohren", z2="nach Wärme.", fotokey="b_5.05.jpg",
     im.save(IMG / f"{name}.jpg", "JPEG", quality=86, optimize=True, progressive=True)
 
 
+def foto_quelle(key):
+    """Originalfoto zu einem Schluessel aus bilder.json, mit demselben Ausschnitt wie auf der Website."""
+    if key in FOTOS_NEU:
+        datei, (l, o, r, u) = FOTOS_NEU[key]
+        im = ImageOps.exif_transpose(Image.open(NEU / datei)).convert("RGB")
+    elif key in FOTOS:
+        datei, (l, o, r, u) = FOTOS[key]
+        im = ImageOps.exif_transpose(Image.open(ROH / datei)).convert("RGB")
+    else:
+        raise KeyError(f"kein Foto mit Schluessel {key}")
+    w, h = im.size
+    return grau(im.crop((int(l * w), int(o * h), int(r * w), int(u * h))))
+
+
+def og_artikel(name, titel, fotokey, ziel=None):
+    """OG-Bild 1200 x 630 fuer einen Ratgeber-Artikel, gesetzt wie og_bild(): Foto rechts, Logo, Monozeile,
+    Titel umbrochen (letzte Zeile gruen), Siegelkasten. Wird von bauen.py nur fuer fehlende oder geaenderte
+    Artikel aufgerufen, bestehende Bilder bleiben unberuehrt."""
+    ziel = Path(ziel) if ziel else IMG
+    ziel.mkdir(parents=True, exist_ok=True)
+    W, H = 1200, 630
+    im = Image.new("RGB", (W, H), KALK)
+    d = ImageDraw.Draw(im)
+    fw, fh = 470, 630
+    foto = ImageOps.fit(foto_quelle(fotokey), (fw, fh), Image.LANCZOS, centering=(0.5, 0.45))
+    im.paste(foto, (W - fw, 0))
+    ttf = HIER / "schibsted.ttf"
+    def schrift(px, wght):
+        f = ImageFont.truetype(str(ttf), px)
+        try:
+            f.set_variation_by_axes([wght])
+        except Exception:
+            pass
+        return f
+    mono = ImageFont.truetype(str(HIER / "plexmono500.ttf"), 24)
+    logo = Image.open(ROH / "logo_Ecogreen_1.png").convert("RGBA")
+    logo.thumbnail((250, 100), Image.LANCZOS)
+    im.paste(logo, (64, 56), logo)
+    d.text((64, 200), "RATGEBER · ERDWÄRMESONDEN", font=mono, fill=GRUEN)
+    woerter = titel.split()
+    for px in range(76, 38, -4):
+        t = schrift(px, 850)
+        zeilen, z = [], ""
+        for wort in woerter:
+            probe = (z + " " + wort).strip()
+            if d.textlength(probe, font=t) <= 640 or not z:
+                z = probe
+            else:
+                zeilen.append(z)
+                z = wort
+        zeilen.append(z)
+        if len(zeilen) <= 4 and len(zeilen) * int(px * 1.09) <= 216 and all(d.textlength(x, font=t) <= 660 for x in zeilen):
+            break
+    for i, zeile in enumerate(zeilen):
+        d.text((60, 240 + i * int(px * 1.09)), zeile, font=t, fill=GRUEN if i == len(zeilen) - 1 else TINTE)
+    x, y, w, h = 64, 488, 520, 78
+    d.rectangle([x, y, x + w, y + h], fill=GRUEN)
+    d.text((x + 22, y + 24), "FWS-GÜTESIEGEL FÜR BOHRFIRMEN", font=mono, fill=(255, 255, 255))
+    im.save(ziel / f"{name}.jpg", "JPEG", quality=86, optimize=True, progressive=True)
+
+
 if __name__ == "__main__":
     import json, sys
     if "--fotos-neu" in sys.argv:
@@ -235,7 +299,7 @@ if __name__ == "__main__":
         ("og-ablauf", "In sechs Schritten", "zur Erdwärme.", "w_WhatsApp-Image-2022-02-16-at-06.21.58.jpg", 0.5),
         ("og-foerderung", "CHF 6'800", "vom Kanton Zürich.", "b_5.05.jpg", 0.35),
         ("og-referenzen", "Baustellen", "im Kanton Zürich.", "w_WhatsApp-Image-2022-02-16-at-06.21.58-21.jpg", 0.5),
-        ("og-ueber-uns", "Bohrfirma aus", "dem Furttal.", "w_WhatsApp-Image-2022-02-16-at-06.22.09.jpg", 0.5),
+        ("og-ueber-uns", "Von Regensdorf", "in Ihren Garten.", "w_WhatsApp-Image-2022-02-16-at-06.22.09.jpg", 0.5),  # neu gesetzt 12.11.2026, nur dieses Bild
         ("og-kontakt", "Offerte anfragen", "044 400 20 20", "b_6.05.jpg", 0.4),
     ]:
         og_bild(n, a, b, f, o)

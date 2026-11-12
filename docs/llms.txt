@@ -1,21 +1,35 @@
 # Eco Green GmbH
 
-> Bohrfirma für Erdwärmesonden in Regensdorf, Kanton Zürich. Träger des FWS-Gütesiegels für Erdwärmesonden-Bohrfirmen (Liste Juni 2021 und Juli 2026). Sondenauslegung, Bewilligungsunterlagen, Erdsondenbohrung, Sondeneinbau, Druckprobe und Anbindung an die Wärmepumpe.
+> Erdsondenbohrungen für Wärmepumpen im Kanton Zürich, Sitz in Regensdorf. Eco Green prüft das Grundstück, bereitet Bewilligung und Fördernachweis vor, bohrt zum vereinbarten Termin und schliesst die Sonde bis in den Heizraum an. Träger des FWS-Gütesiegels für Erdwärmesonden-Bohrfirmen (Liste Juni 2021 und Stand September 2026).
 
 ## Fakten
 - Firma: Eco Green GmbH, UID CHE-141.654.180, Handelsregister Kanton Zürich
 - Adresse: Pumpwerkstrasse 40, 8105 Regensdorf, Schweiz
 - Telefon: 044 400 20 20, E-Mail: info@eco-green.ch
-- Gütesiegel: FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen, eine von 45 Firmen auf der Liste vom Juli 2026: https://www.fws.ch/wp-content/uploads/2026/07/072026_FWS_GSP_Guetesiegelliste_D_F.pdf
+- Gütesiegel: FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen, Gütesiegelliste Stand September 2026: https://www.fws.ch/wp-content/uploads/2026/09/FWS_GSP_Guetesiegelliste_D_F.pdf
 - Einsatzgebiet: Kanton Zürich und angrenzende Regionen
-- Förderung Kanton Zürich: Erdwärmepumpe bis 15 kW CHF 6'800, darüber CHF 420 pro zusätzliches kW. Zusatzbeitrag CHF 3'000 plus CHF 100 pro kW über 15 kW für Sonden ohne Frostschutzmittel oder mit vollständiger Regeneration. Gesuch vor der Bohrung, ersetzt Öl-, Gas- oder Elektroheizung in bestehendem Gebäude. Der Kanton verlangt eine Bohrfirma mit gültigem Gütesiegel.
-- Bewilligung: gewässerschutzrechtliche Bewilligung des AWEL, eingereicht bei der Gemeinde. Unter 2,5 m Grenzabstand Zustimmung des Nachbarn.
+- Förderung Kanton Zürich (Förderprogramm 2026): Erdwärmepumpe bis 15 kW CHF 6'800, darüber CHF 420 pro zusätzliches kW. Zusatzbeitrag CHF 3'000 plus CHF 100 pro kW über 15 kW für Sonden ohne Frostschutzmittel oder mit vollständiger Regeneration. Gesuch vor der Bohrung, ersetzt Öl-, Gas- oder Elektroheizung in bestehendem Gebäude. Der Kanton verlangt eine Bohrfirma mit gültigem Gütesiegel.
+- Bewilligung: gewässerschutzrechtliche Bewilligung des AWEL, eingereicht bei der Gemeinde. Unter 2.5 m Grenzabstand Zustimmung des Nachbarn.
+- Tiefe und Dauer: üblich 100 bis 300 m laut EnergieSchweiz, für 100 m mit Installation zwei bis drei Tage.
 
 ## Seiten
-- [Start](https://leitung-gif.github.io/eco-green-website/): Überblick, Ablauf in sechs Schritten, Förderung, Baustellenregeln, häufige Fragen
-- [Leistungen](https://leitung-gif.github.io/eco-green-website/leistungen): Sondenauslegung bis Befüllung
-- [Ablauf](https://leitung-gif.github.io/eco-green-website/ablauf): sechs Schritte, Bewilligung, Baustellenregeln
-- [Förderung](https://leitung-gif.github.io/eco-green-website/foerderung): Beiträge, Bedingungen, Unterlagen, Rechner
-- [Baustellen](https://leitung-gif.github.io/eco-green-website/referenzen): Projektbeispiele und Geräte
-- [Über uns](https://leitung-gif.github.io/eco-green-website/ueber-uns): Firma, Gütesiegel, Personen
-- [Kontakt](https://leitung-gif.github.io/eco-green-website/kontakt): Telefon, E-Mail, Angaben für die Erstabklärung
+- [Start](https://leitung-gif.github.io/eco-green-website/): Heizungsersatz, Erdwärme, was Eco Green übernimmt, Gütesiegel, Förderrechner, häufige Fragen
+- [Leistungen](https://leitung-gif.github.io/eco-green-website/pages/leistungen): Sondenauslegung bis Befüllung
+- [Ablauf](https://leitung-gif.github.io/eco-green-website/pages/ablauf): sechs Schritte, Bewilligung, Baustellenregeln
+- [Förderung](https://leitung-gif.github.io/eco-green-website/pages/foerderung): Beiträge, Bedingungen, Unterlagen, Rechner
+- [Baustellen](https://leitung-gif.github.io/eco-green-website/pages/referenzen): Fotos von Baustellen und Geräten, Beispiele zur Orientierung (keine Kundenprojekte)
+- [Ratgeber](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber): Beiträge zu Bewilligung, Förderung, Kosten und Ablauf, mit Quellen
+- [Über uns](https://leitung-gif.github.io/eco-green-website/pages/ueber-uns): Firma, Gütesiegel, Personen
+- [Kontakt](https://leitung-gif.github.io/eco-green-website/pages/kontakt): Telefon, E-Mail, Angaben für die Erstabklärung
+
+## Ratgeber
+- [Was kostet eine Erdsondenbohrung?](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-kosten): Für ein Einfamilienhaus nennt EnergieSchweiz für die Bohrung der Erdwärmesonde mit Installation etwa CHF 15'000 bis 25'000, für die ganze Anlage mit Wärmepumpe meist CHF 55'000 bis 80'000. Ersetzt die Anlage eine Öl-, Gas- oder Elektroheizung, zahlt der Kanton Zürich einen Förderbeitrag daran. Stand 12.11.2026.
+- [Erdsonde oder Luft-Wasser-Wärmepumpe im Vergleich](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-oder-luft-wasser-waermepumpe): Die Erdsonde kostet in der Anschaffung mehr, braucht im Betrieb weniger Strom und kommt ohne Aussengerät aus. Die Luft-Wasser-Wärmepumpe ist günstiger und schneller bewilligt, holt ihre Wärme aber aus der Aussenluft, die im Winter am kältesten ist. Stand 12.11.2026.
+- [Bewilligung für eine Erdwärmesonde im Kanton Zürich](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-bewilligung-zuerich): Jede Erdwärmesonde im Kanton Zürich braucht eine gewässerschutzrechtliche Bewilligung des AWEL. Sie reichen das Gesuch mit Situationsplan bei Ihrer Gemeinde ein, auf Papier oder über eBaugesucheZH, und gebohrt wird erst mit der Bewilligung. Stand 12.11.2026.
+- [Wärmenutzungsatlas Zürich: So lesen Sie die Karte für Ihre Parzelle](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/waermenutzungsatlas-zuerich): Der Wärmenutzungsatlas des Kantons Zürich zeigt für jede Parzelle, ob Erdwärmesonden zulässig sind und bis in welche Tiefe. Entscheidend sind die Zone A bis F, die Ebene mit «besonderen Auflagen» und «nicht zulässig» und eine allfällige Tiefenbeschränkung. Stand 12.11.2026.
+- [Gibt es 2027 noch Fördergeld für die Erdwärmepumpe?](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/foerderung-heizungsersatz-2027): Ja, der Bund führt das Gebäudeprogramm 2027 mit einer Übergangslösung weiter, nur die Zürcher Sätze für 2027 sind am 12.11.2026 noch nicht publiziert. Ab 01.01.2028 soll ein neues Programm von Bund und Kantonen gelten. Eine Zusicherung aus dem Programm 2026 gilt zwei Jahre. Stand 12.11.2026.
+- [Wie tief wird eine Erdsonde gebohrt?](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-tiefe): Laut EnergieSchweiz liegt die Standardtiefe einer Erdsonde bei 100 bis 300 Metern. Wie tief Ihre Sonde wird, bestimmen der Wärmebedarf des Hauses, der Untergrund und die Vorgaben des Kantons an Ihrem Standort. Stand 12.11.2026.
+- [Erdsondenbohrung: Was an den Bohrtagen bei Ihnen passiert](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsondenbohrung-baustelle): Für eine Bohrung von 100 Metern mit Installation rechnet EnergieSchweiz unter normalen Verhältnissen mit zwei bis drei Tagen. Gerät und Material brauchen mindestens 30 bis 32 Quadratmeter, der Bohrschlamm wird aufgefangen und nach kantonalen Vorgaben entsorgt. Stand 12.11.2026.
+- [Wie lange hält eine Erdsonde?](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-lebensdauer-regeneration): Für Erdwärmesonden gilt nach den Normen SIA 384/6 und 384/7 eine Lebensdauer von mindestens 50 Jahren, schreibt EnergieSchweiz. Bei der Wärmepumpe rechnet die Praxis mit mindestens 20 Jahren, die Sonde überdauert also mehr als ein Gerät. Stand 12.11.2026.
+- [Das FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen erklärt](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/guetesiegel-erdwaermesonden-bohrfirma): Das Gütesiegel vergibt eine Kommission der Fachvereinigung Wärmepumpen Schweiz FWS an Bohrfirmen, die ihr Reglement erfüllen und auf der Bohrstelle unangemeldet geprüft werden. Im Kanton Zürich gehört der Nachweis zum Fördergesuch für die Erdwärmepumpe, im Aargau darf grundsätzlich nur eine Firma mit Siegel bohren. Stand 12.11.2026.
+- [Heizungsersatz im Kanton Zürich: was das Energiegesetz verlangt](https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/heizungsersatz-zuerich-energiegesetz): Seit 01.09.2022 muss im Kanton Zürich eine Öl- oder Gasheizung in einem bestehenden Gebäude grundsätzlich durch ein erneuerbares Heizsystem ersetzt werden. Ausnahmen gibt es, wenn das technisch nicht geht oder über den Lebenszyklus mehr als fünf Prozent teurer ist, Elektroheizungen sind bis 2030 zu ersetzen. Stand 12.11.2026.

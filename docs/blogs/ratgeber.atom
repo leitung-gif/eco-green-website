@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de-CH">
+ <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber</id>
+ <title>Eco Green Ratgeber</title>
+ <subtitle>Ratgeber zu Erdwärmesonden im Kanton Zürich</subtitle>
+ <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber"/>
+ <link rel="self" type="application/atom+xml" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber.atom"/>
+ <updated>2026-11-12T00:00:00+01:00</updated>
+ <author><name>Eco Green GmbH</name><uri>https://leitung-gif.github.io/eco-green-website/</uri></author>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-kosten</id>
+  <title>Was kostet eine Erdsondenbohrung?</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-kosten"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Für ein Einfamilienhaus nennt EnergieSchweiz für die Bohrung der Erdwärmesonde mit Installation etwa CHF 15&#x27;000 bis 25&#x27;000, für die ganze Anlage mit Wärmepumpe meist CHF 55&#x27;000 bis 80&#x27;000. Ersetzt die Anlage eine Öl-, Gas- oder Elektroheizung, zahlt der Kanton Zürich einen Förderbeitrag daran.</summary>
+  <category term="Kosten"/>
+  <category term="Erdwärmesonde"/>
+  <category term="Förderung"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-oder-luft-wasser-waermepumpe</id>
+  <title>Erdsonde oder Luft-Wasser-Wärmepumpe im Vergleich</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-oder-luft-wasser-waermepumpe"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Die Erdsonde kostet in der Anschaffung mehr, braucht im Betrieb weniger Strom und kommt ohne Aussengerät aus. Die Luft-Wasser-Wärmepumpe ist günstiger und schneller bewilligt, holt ihre Wärme aber aus der Aussenluft, die im Winter am kältesten ist.</summary>
+  <category term="Vergleich"/>
+  <category term="Wärmepumpe"/>
+  <category term="Erdwärmesonde"/>
+  <category term="Heizungsersatz"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-bewilligung-zuerich</id>
+  <title>Bewilligung für eine Erdwärmesonde im Kanton Zürich</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-bewilligung-zuerich"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Jede Erdwärmesonde im Kanton Zürich braucht eine gewässerschutzrechtliche Bewilligung des AWEL. Sie reichen das Gesuch mit Situationsplan bei Ihrer Gemeinde ein, auf Papier oder über eBaugesucheZH, und gebohrt wird erst mit der Bewilligung.</summary>
+  <category term="Bewilligung"/>
+  <category term="Kanton Zürich"/>
+  <category term="Erdwärmesonde"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/waermenutzungsatlas-zuerich</id>
+  <title>Wärmenutzungsatlas Zürich: So lesen Sie die Karte für Ihre Parzelle</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/waermenutzungsatlas-zuerich"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Der Wärmenutzungsatlas des Kantons Zürich zeigt für jede Parzelle, ob Erdwärmesonden zulässig sind und bis in welche Tiefe. Entscheidend sind die Zone A bis F, die Ebene mit «besonderen Auflagen» und «nicht zulässig» und eine allfällige Tiefenbeschränkung.</summary>
+  <category term="Wärmenutzungsatlas"/>
+  <category term="Grundwasser"/>
+  <category term="Kanton Zürich"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/foerderung-heizungsersatz-2027</id>
+  <title>Gibt es 2027 noch Fördergeld für die Erdwärmepumpe?</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/foerderung-heizungsersatz-2027"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Ja, der Bund führt das Gebäudeprogramm 2027 mit einer Übergangslösung weiter, nur die Zürcher Sätze für 2027 sind am 12.11.2026 noch nicht publiziert. Ab 01.01.2028 soll ein neues Programm von Bund und Kantonen gelten. Eine Zusicherung aus dem Programm 2026 gilt zwei Jahre.</summary>
+  <category term="Förderung"/>
+  <category term="Heizungsersatz"/>
+  <category term="Kanton Zürich"/>
+  <category term="Steuern"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-tiefe</id>
+  <title>Wie tief wird eine Erdsonde gebohrt?</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-tiefe"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Laut EnergieSchweiz liegt die Standardtiefe einer Erdsonde bei 100 bis 300 Metern. Wie tief Ihre Sonde wird, bestimmen der Wärmebedarf des Hauses, der Untergrund und die Vorgaben des Kantons an Ihrem Standort.</summary>
+  <category term="Erdwärmesonde"/>
+  <category term="Sondentiefe"/>
+  <category term="SIA 384/6"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsondenbohrung-baustelle</id>
+  <title>Erdsondenbohrung: Was an den Bohrtagen bei Ihnen passiert</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsondenbohrung-baustelle"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Für eine Bohrung von 100 Metern mit Installation rechnet EnergieSchweiz unter normalen Verhältnissen mit zwei bis drei Tagen. Gerät und Material brauchen mindestens 30 bis 32 Quadratmeter, der Bohrschlamm wird aufgefangen und nach kantonalen Vorgaben entsorgt.</summary>
+  <category term="Baustelle"/>
+  <category term="Bohrschlamm"/>
+  <category term="Baulärm"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-lebensdauer-regeneration</id>
+  <title>Wie lange hält eine Erdsonde?</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/erdsonde-lebensdauer-regeneration"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Für Erdwärmesonden gilt nach den Normen SIA 384/6 und 384/7 eine Lebensdauer von mindestens 50 Jahren, schreibt EnergieSchweiz. Bei der Wärmepumpe rechnet die Praxis mit mindestens 20 Jahren, die Sonde überdauert also mehr als ein Gerät.</summary>
+  <category term="Lebensdauer"/>
+  <category term="Regeneration"/>
+  <category term="Erdwärmesonde"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/guetesiegel-erdwaermesonden-bohrfirma</id>
+  <title>Das FWS-Gütesiegel für Erdwärmesonden-Bohrfirmen erklärt</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/guetesiegel-erdwaermesonden-bohrfirma"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Das Gütesiegel vergibt eine Kommission der Fachvereinigung Wärmepumpen Schweiz FWS an Bohrfirmen, die ihr Reglement erfüllen und auf der Bohrstelle unangemeldet geprüft werden. Im Kanton Zürich gehört der Nachweis zum Fördergesuch für die Erdwärmepumpe, im Aargau darf grundsätzlich nur eine Firma mit Siegel bohren.</summary>
+  <category term="Gütesiegel"/>
+  <category term="Qualität"/>
+  <category term="Förderung"/>
+ </entry>
+ <entry>
+  <id>https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/heizungsersatz-zuerich-energiegesetz</id>
+  <title>Heizungsersatz im Kanton Zürich: was das Energiegesetz verlangt</title>
+  <link rel="alternate" type="text/html" href="https://leitung-gif.github.io/eco-green-website/blogs/ratgeber/heizungsersatz-zuerich-energiegesetz"/>
+  <published>2026-11-12T00:00:00+01:00</published>
+  <updated>2026-11-12T00:00:00+01:00</updated>
+  <author><name>Eco Green GmbH</name></author>
+  <summary type="text">Seit 01.09.2022 muss im Kanton Zürich eine Öl- oder Gasheizung in einem bestehenden Gebäude grundsätzlich durch ein erneuerbares Heizsystem ersetzt werden. Ausnahmen gibt es, wenn das technisch nicht geht oder über den Lebenszyklus mehr als fünf Prozent teurer ist, Elektroheizungen sind bis 2030 zu ersetzen.</summary>
+  <category term="Heizungsersatz"/>
+  <category term="Energiegesetz"/>
+  <category term="Kanton Zürich"/>
+  <category term="Beratung"/>
+ </entry>
+</feed>
