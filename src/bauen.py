@@ -658,7 +658,8 @@ def seite_leistungen():
 
 
 def seite_ablauf():
-    s = {"ziel": "ablauf", "ogbild": "og-ablauf", "preload": preload("kompressor", "(max-width: 900px) 100vw, 33vw"), "spur": [("ablauf", "Ablauf")],
+    s = {"ziel": "ablauf", "ogbild": "og-ablauf", "preload": preload("aggregat-quer", "(max-width: 900px) 100vw, 33vw"), "spur": [("ablauf", "Ablauf")],
+         "stand": "2026-11-13",   # Kopfbild getauscht
          "title": "Ablauf Erdsondenbohrung im Kanton Zürich | Eco Green",
          "desc": "Wer wann was tut, von der Abklärung bis zur Übergabe: die Dauer jedes Schritts, die Bewilligung beim AWEL und unsere Regeln auf der Baustelle im Garten."}
     p = PFAD
@@ -683,7 +684,7 @@ def seite_ablauf():
         f'<div class="phase-sie"><h3>Was Sie tun</h3><p>{sie[i]}</p></div><div class="phase-wir"><h3>Was wir tun</h3><p>{wir[i]}</p></div></article>'
         for i, (t, dauer, _wer, _x) in enumerate(SCHRITTE))
     body = seitenkopf(s, "Ablauf einer Erdsondenbohrung.", "Die meiste Zeit braucht die Bewilligung. Gebohrt wird an wenigen Tagen.",
-                      foto(p, "kompressor", "Raupenbohrgerät und Kompressor von Eco Green auf einem Bohrplatz", "Bohrplatz mit Bohrgerät und Kompressor.", lazy=False, prio=True, sizes="(max-width: 900px) 100vw, 33vw", pos="72% 50%")) + f"""
+                      foto(p, "aggregat-quer", "Rotes Bohrgerät, Stromaggregat mit Eco-Green-Logo und Sondenrolle auf einem Bohrplatz", "Bohrplatz mit Bohrgerät und Stromaggregat.", lazy=False, prio=True, sizes="(max-width: 900px) 100vw, 33vw")) + f"""
 <section class="sektion" data-shopify="phasen"><div class="wrap raster">{phasen}</div></section>
 <section class="sektion hell" aria-labelledby="bew-h">
  <div class="wrap raster">
@@ -808,12 +809,14 @@ PROJEKTE = [
 
 def seite_referenzen():
     s = {"ziel": "referenzen", "ogbild": "og-referenzen", "preload": preload("maylin", "(max-width: 900px) 50vw, 25vw"), "spur": [("referenzen", "Baustellen")],
+         "stand": "2026-11-13",   # Galerie: Kompressor raus, Kran rein
          "title": "Baustellen: Erdsondenbohrungen im Kanton Zürich | Eco Green",
          "desc": "Fotos von Baustellen von Eco Green und Beispiele zur Orientierung: wie viele Sonden und welche Tiefe ein Haus im Kanton Zürich je nach Grösse braucht."}
     p = PFAD
     zeilen = "".join(f'<tr><td data-label="Objekt">{o}</td><td data-label="Region">{ort}</td><td data-label="Ersetzt">{alt}</td><td data-label="Sonden" class="zahl">{sonden}</td><td data-label="Besonderheit">{notiz}</td></tr>'
                      for o, ort, alt, sonden, notiz in PROJEKTE)
-    # Fotos vom 12.11.2026 (Mahissa Ganz-Yasri) zuerst, dazu die drei staerksten von 2022. pos = Ausschnitt im Hochformat.
+    # Fotos vom 12.11.2026 (Mahissa Ganz-Yasri) zuerst, dazu vier von 2022. pos = Ausschnitt im Hochformat.
+    # Kein Bild mit Aufkleber «gadola» (Entscheid Sinan 13.11.2026): Kompressor raus, dafuer der Kran.
     gal = "".join(foto(p, k, a, c, sizes="(max-width: 900px) 50vw, 25vw", lazy=i > 3, prio=i == 0, pos=pos) for i, (k, a, c, pos) in enumerate([
         ("maylin", "Rotes Raupenbohrgerät von Eco Green auf einem Bauplatz zwischen Wohnhäusern", "Bohrgerät Maylin auf dem Bauplatz.", None),
         ("garten", "Türkises Raupenbohrgerät im Garten eines Einfamilienhauses", "Garten eines Einfamilienhauses.", None),
@@ -825,7 +828,7 @@ def seite_referenzen():
         ("feld", "Bohrgerät und Bagger am Siedlungsrand im Winter", "Siedlungsrand im Winter.", None),
         ("verteiler-grube", "Sondenverteiler in einer Grube, die Leitungen führen ins Erdreich", "Verteiler in der Grube.", None),
         ("nachher", "Asphaltierter Vorplatz nach der Bohrung, aus dem Boden ragt nur das Sondenrohr mit Schutzkappe", "Nach der Bohrung bleibt das Sondenrohr.", "62% 50%"),
-        ("kompressor", "Raupenbohrgerät und Kompressor von Eco Green auf einem Bohrplatz", "Bohrgerät und Kompressor.", "72% 50%"),
+        ("kran", "Ein Kran hebt ein Raupenbohrgerät über ein Wohnhaus", "Am Kran über das Dach.", None),
         ("verteiler-14", "Sondenverteiler mit 14 nummerierten Anschlüssen in einem Technikraum", "Verteiler für 14 Sonden.", None),
     ]))
     body = seitenkopf(s, "Baustellen.", "Alle Bilder auf dieser Website stammen von Baustellen von Eco Green. So sieht es aus, wenn wir bei Ihnen bohren.") + f"""

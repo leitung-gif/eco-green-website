@@ -53,7 +53,8 @@ FOTOS_NEU = {
     "team-quer":       (_W + "13.24.20 (6).jpeg", (0, 0.4375, 1, 1)),    # 4:3, Seitenkopf
     "team-nah":        (_W + "13.24.20 (8).jpeg", (0, 0.40, 1, 0.9625)), # 4:3, Bildreihe
     "hang":            (_W + "13.24.21 (1).jpeg", (0, 0, 1, 1)),         # hoch
-    "kompressor":      (_W + "13.24.33.jpeg", (0, 0, 0.955, 1)),         # quer, rechter Rand weg (fremder Aufkleber)
+    "aggregat-quer":   (_W + "13.24.20 (1).jpeg", (0, 0.4375, 1, 1)),    # 4:3, Seitenkopf Ablauf
+    # 13.24.33.jpeg (Kompressor) seit 13.11.2026 nicht mehr verwendet: Aufkleber «gadola» am Geraet (Entscheid Sinan)
     "verteiler-14":    (_W + "13.21.49.jpeg", (0, 0, 1, 1)),             # quer
     "verteiler-grube": (_W + "13.24.20 (10).jpeg", (0, 0, 1, 1)),        # hoch
     "sondenkopf":      (_W + "13.24.20 (5).jpeg", (0, 0.36, 1, 0.9225)), # 4:3, Leistungen
